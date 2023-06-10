@@ -1,0 +1,38 @@
+.contact-heading{
+    color: #fff;
+    font-weight: 700;
+    font-size: 36px;
+    text-transform: uppercase;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.content-wrapper{
+    padding: 50px;
+}
+.section-title{
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 50px;
+    color: #000;
+}
+.welcome-txt{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;    
+    color: #6B6B6B;
+}
+.inner-page-list {
+padding-left: 20px;
+color:#6B6B6B;
+}
+.pb-35 {
+    padding-bottom: 35px;
+}
+.company-option {
+    background: #F7F7F7;
+    margin-top: 50px;
+    padding: 25px 0px;
+  }
+  .lr-space{
+    padding: 0 50px ;
+  }

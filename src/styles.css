@@ -1,0 +1,8 @@
+@import "~ngx-toastr/toastr";
+
+body .modal-open {
+  overflow-y: hidden !important;
+}
+
+html, body { height: 100%; }
+body,.mat-body, .mat-body-1, .mat-typography { margin: 0; font-family: 'Outfit', sans-serif !important; }

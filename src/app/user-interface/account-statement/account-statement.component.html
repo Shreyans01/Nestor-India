@@ -1,0 +1,210 @@
+<app-header></app-header>
+
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+
+<section class="page-header page-header-text-light bg-secondary">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1>My Profile</h1>
+            </div>
+            <div class="col-md-4">
+                <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">My Profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="content" class="myProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <app-profile-menu></app-profile-menu>
+            </div>
+
+            <!-- Personal Information
+          ============================================= -->
+            <!-- <h4 class="mb-4">Personal Information</h4>
+                    <hr class="mx-n4 mb-4"> -->
+
+            <div class="col-lg-9">
+                <div class="bg-white shadow-md rounded p-4">
+                    <!-- Orders History
+                              ============================================= -->
+                    <div class="col-md-6 d-inline-block text-left accountStatement">
+
+                        <label for="datePicker" class="form-label">Date: </label>
+                        <input type="date" class="ml-2" #Dates (change)="accountStatement(Dates.value)"
+                            name="reportDate" value="{{currentDate | date:'yyyy-MM-dd'}}">
+                    </div>
+                    <div class="col-md-6 d-inline-block text-right">
+
+                        <h5 class="text-right"> Wallet Balance: {{ rupee_sym }} {{ result4 }}</h5>
+                    </div>
+
+                    <hr class="mx-n4">
+
+
+
+                    <div class="tab-content my-3" id="myTabContent">
+                        <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                            <div class="table-responsive-md">
+                                <table class="table table-hover border">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Credit</th>
+                                            <th>Debit</th>
+                                            <th>Particular</th>
+                                            <th class="text-center">Remark</th>
+                                            <th class="text-right">Balance</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of result2">
+                                            <td class="align-middle">{{ item.Credit }}</td>
+                                            <td class="align-middle">{{ item.Debit }}</td>
+                                            <td class="align-middle">{{ item.Particular }}</td>
+                                            <td class="align-middle text-center">{{ item.Remark }}</td>
+                                            <td class="align-middle text-right">{{ rupee_sym }} {{ item.Balance }}</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--  <div class="text-center pt-3"><a href="#" class="btn btn-outline-primary shadow-none">View More</a>
+                                    </div> -->
+                        </div>
+                        <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+                            <div class="table-responsive-md">
+                                <table class="table table-hover border">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Order ID</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-right">Amount</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle">06/06/2018</td>
+                                            <td class="align-middle"><img src="images/brands/operator/vodafone.jpg"
+                                                    class="img-thumbnail d-inline-flex mr-1"> <span
+                                                    class="text-1 d-inline-flex">Recharge of Vodafone Mobile
+                                                    9696969696</span></td>
+                                            <td class="align-middle">5286977475</td>
+                                            <td class="align-middle text-center"><i
+                                                    class="fas fa-check-circle text-4 text-success"
+                                                    data-toggle="tooltip"
+                                                    data-original-title="Your order is Successful"></i></td>
+                                            <td class="align-middle text-right">$150</td>
+                                            <td class="align-middle text-center"><a href="#" data-toggle="tooltip"
+                                                    data-original-title="Repeat Order"><i
+                                                        class="fas fa-redo-alt"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">31/05/2018</td>
+                                            <td class="align-middle"><img src="images/brands/operator/vodafone.jpg"
+                                                    class="img-thumbnail d-inline-flex mr-1"> <span
+                                                    class="text-1 d-inline-flex">Recharge of Vodafone Mobile
+                                                    9898989898</span></td>
+                                            <td class="align-middle">1072317951</td>
+                                            <td class="align-middle text-center"><i
+                                                    class="fas fa-ellipsis-h text-4 text-info" data-toggle="tooltip"
+                                                    data-original-title="Your order is in Progress"></i></td>
+                                            <td class="align-middle text-right">$99</td>
+                                            <td class="align-middle text-center"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">21/05/2018</td>
+                                            <td class="align-middle"><img src="images/brands/operator/vodafone.jpg"
+                                                    class="img-thumbnail d-inline-flex mr-1"> <span
+                                                    class="text-1 d-inline-flex">Recharge of Vodafone Mobile
+                                                    9898989898</span></td>
+                                            <td class="align-middle">3079317986</td>
+                                            <td class="align-middle text-center"><i
+                                                    class="fas fa-times-circle text-4 text-danger" data-toggle="tooltip"
+                                                    data-original-title="Your order is Failed"></i></td>
+                                            <td class="align-middle text-right">$280</td>
+                                            <td class="align-middle text-center"><a href="#" data-toggle="tooltip"
+                                                    data-original-title="Retry Order"><i
+                                                        class="fas fa-redo-alt "></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
+                            <div class="table-responsive-md">
+                                <table class="table table-hover border">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Order ID</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-right">Amount</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle">02/06/2018</td>
+                                            <td class="align-middle"><img src="images/brands/flights/indigo.png"
+                                                    class="img-thumbnail d-inline-flex mr-1"> <span
+                                                    class="text-1 d-inline-flex">Booking of Delhi to Sydney
+                                                    flight</span></td>
+                                            <td class="align-middle">5136907172</td>
+                                            <td class="align-middle text-center"><i
+                                                    class="fas fa-check-circle text-4 text-success"
+                                                    data-toggle="tooltip"
+                                                    data-original-title="Your order is Successful"></i></td>
+                                            <td class="align-middle text-right">$980</td>
+                                            <td class="align-middle text-center"><a href="#" data-toggle="tooltip"
+                                                    data-original-title="Repeat Order"><i
+                                                        class="fas fa-redo-alt"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">25/05/2018</td>
+                                            <td>
+                                                <div class="d-lg-flex align-items-center"> <span
+                                                        class="img-thumbnail d-inline-flex text-8 p-2 mr-2"><i
+                                                            class="fas fa-bus"></i></span> <span
+                                                        class="text-1 d-inline-flex">Booking of Mumbai to Surat
+                                                        Bus</span> </div>
+                                            </td>
+                                            <td class="align-middle">4103520927</td>
+                                            <td class="align-middle text-center"><i
+                                                    class="fas fa-check-circle text-4 text-success"
+                                                    data-toggle="tooltip"
+                                                    data-original-title="Your order is Successful"></i></td>
+                                            <td class="align-middle text-right">$450</td>
+                                            <td class="align-middle text-center"><a href="#" data-toggle="tooltip"
+                                                    data-original-title="Repeat Order"><i
+                                                        class="fas fa-redo-alt"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Orders History end -->
+                </div>
+            </div>
+
+            <!-- Personal Information end -->
+
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

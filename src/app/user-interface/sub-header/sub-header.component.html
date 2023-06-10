@@ -1,0 +1,14 @@
+<div class="bg-secondary">
+        <div class="container">
+                <carousel class="nav secondary-nav header-general" [height]="110" [arrowsOutside]="true" [margin]="5"
+                        [cellWidth]="120" [cellsToScroll]="9" #myCarousel>
+                        <li class="nav-item carousel-cell" *ngFor="let carousal of Carousal"
+                                [routerLink]="[carousal?.route]" routerLinkActive="active"
+                                (click)="clickCarousal(carousal?.route)">
+                                <a class="nav-link btn" routerLinkActive="active"><span><i
+                                                        [class]="carousal?.icon"></i></span>
+                                        {{carousal?.name}}</a>
+                        </li>
+                </carousel>
+        </div>
+</div>

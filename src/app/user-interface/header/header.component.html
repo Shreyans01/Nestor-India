@@ -1,0 +1,113 @@
+<header id="header">
+        <div id="ht-preloader" *ngIf="isLoading">
+                <div class="loader clear-loader">
+                        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+                </div>
+        </div>
+        <div class="container">
+                <div class="header-row">
+                        <div class="header-column justify-content-start">
+                                <!-- Logo-->
+                                <div class="logo">
+                                        <a [routerLink]="['/']" routerLinkActive="router-link-active" class="d-flex"
+                                                title="Nestor India"><img src="assets/e-commerce/images/logo_new1.png"
+                                                        class="item" style="width: 220px;" alt="Nestor logo" /></a>
+                                </div>
+                                <!-- Logo end -->
+                        </div>
+                        <div class="header-column justify-content-end">
+                                <!-- Primary Navigation-->
+                                <nav class="primary-menu navbar navbar-expand-lg">
+                                        <div id="header-nav" class="collapse navbar-collapse">
+                                                <ul class="navbar-nav">
+                                                        <li class=""> <a class="dropdown-toggle" [routerLink]="['/']"
+                                                                        routerLinkActive="active">Home</a>
+                                                        <li class=""> <a *ngIf="login" class="dropdown-toggle"
+                                                                        [routerLink]="['/booking/bus']"
+                                                                        routerLinkActive="active">Bus Booking</a>
+                                                                <a *ngIf="!login" class="dropdown-toggle" href=""
+                                                                        data-toggle="modal"
+                                                                        data-target="#login-modal">Bus Booking</a>
+                                                        </li>
+                                                        <li class="dropdown"> <a class="dropdown-toggle"
+                                                                        [routerLink]="['/']"
+                                                                        routerLinkActive="active">Recharge
+                                                                        <!--  & Bill Payment -->
+                                                                </a>
+                                                                <ul class="dropdown-menu dropdown-menu-sm">
+                                                                        <li>
+                                                                                <div class="row">
+                                                                                        <div class="col-lg-6">
+                                                                                                <ul
+                                                                                                        class="dropdown-mega-submenu">
+                                                                                                        <li class=""
+                                                                                                                *ngFor="let carousal of CarousalHeader1"
+                                                                                                                [routerLink]="[carousal?.route]"
+                                                                                                                (click)="clickCarousal1(carousal?.route)"
+                                                                                                                routerLinkActive="active">
+                                                                                                                <a class="nav-link"
+                                                                                                                        routerLinkActive="active">{{carousal?.name}}</a>
+                                                                                                        </li>
+                                                                                                </ul>
+                                                                                        </div>
+                                                                                        <div class="col-lg-6">
+                                                                                                <ul
+                                                                                                        class="dropdown-mega-submenu">
+                                                                                                        <li class=""
+                                                                                                                *ngFor="let carousal of CarousalHeader2"
+                                                                                                                [routerLink]="[carousal?.route]"
+                                                                                                                (click)="clickCarousal2(carousal?.route)"
+                                                                                                                routerLinkActive="active">
+                                                                                                                <a class="nav-link"
+                                                                                                                        routerLinkActive="active">{{carousal?.name}}</a>
+                                                                                                        </li>
+                                                                                                </ul>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </li>
+                                                                </ul>
+                                                        </li>
+                                                        <li><a [routerLink]="['/home']"
+                                                                        routerLinkActive="active">E-commerce</a></li>
+                                                        <li><a href="https://www.nestorindia.com/blog/">Blog</a></li>
+                                                </ul>
+                                        </div>
+                                </nav>
+                                <!-- Primary Navigation end -->
+
+                                <!-- Collapse Button -->
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#header-nav">
+                                        <span></span> <span></span> <span></span> </button>
+
+                                <!-- Login Signup -->
+                                <nav class="login-signup navbar navbar-expand separator ml-sm-2 pl-sm-2">
+                                        <ul class="navbar-nav">
+                                                <li class="profile" *ngIf="!login; else userloggedOut">
+
+                                                        <a class="pr-0" data-toggle="modal" data-target="#login-modal"
+                                                                href="#" title="Login / Sign up"><span
+                                                                        class="d-none d-sm-inline-block">Login / Sign
+                                                                        up</span>
+                                                                <span class="user-icon ml-sm-2"><i
+                                                                                class="fas fa-user"></i></span></a>
+                                                </li>
+                                                <ng-template #userloggedOut>
+                                                        <li>
+                                                                <a class="dropdown-item"
+                                                                        style="font-size: 28px;padding: 10px;"
+                                                                        [routerLink]="['/profile']"
+                                                                        routerLinkActive="router-link-active"><i
+                                                                                class="las la-user-alt"></i></a>
+                                                                <a class="dropdown-item" [routerLink]="['/logout']"
+                                                                        routerLinkActive="active"><i
+                                                                                class="fas fa-sign-out-alt"></i>Log
+                                                                        Out</a>
+                                                        </li>
+                                                </ng-template>
+                                        </ul>
+                                </nav>
+                        </div>
+                </div>
+        </div>
+</header>

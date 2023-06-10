@@ -1,0 +1,6 @@
+.custom-select:not(.custom-select-sm) {
+  height: calc(3rem + 0px);
+  min-height: 0% !important;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}

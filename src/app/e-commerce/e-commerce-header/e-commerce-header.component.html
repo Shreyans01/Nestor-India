@@ -1,0 +1,182 @@
+<!--header start-->
+<header class="site-header e-commerceHeader">
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+    <div class="header-top bg-dark py-1 d-none d-md-flex">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 d-flex align-items-center
+                    justify-content-center text-white header-top-inner">
+                    <div class="d-none d-md-flex align-items-center ">
+                        <small class="me-4 topbar-text">
+                            <i class="las la-store topbar-icon me-1 align-middle"></i>
+                            Welcome to Our store Nestor India
+                        </small>
+                        <small class="topbar-text ms-4">
+                            <i class="las la-truck topbar-icon me-1 align-middle"></i>
+                            Free shipping worldwide
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light header-main-custom">
+        <a class="navbar-brand main-logo-wrapper" href="#">
+            <img class="img-fluid img-wrapper" src="assets/e-commerce/images/logo_new1.jpg" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand res-main-logo" href="#">
+                <img class="img-fluid img-wrapper" src="assets/e-commerce/images/logo_new1.jpg" alt="">
+            </a>
+            <ul class="navbar-nav header-ul">
+                <li class="nav-item active" [ngClass]="{'active': currentUrl == '/home'}">
+                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
+                <li class="nav-item" [ngClass]="{'active': currentUrl == '/productList' && !isCategory}">
+                    <a class="nav-link" [routerLink]="['/productList']"
+                        routerLinkActive="router-link-active">Products</a>
+                </li>
+                <li class="nav-item dropdown position-static" [ngClass]="{'active': isCategory == true}">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+                    <div class="dropdown-menu">
+                        <div class="container p-0">
+                            <div class="row w-100 g-0">
+                                <div class="row p-4 categoriesdiv">
+                                    <div class="col-12 col-md-3 col-sm-6" *ngFor="let item of result">
+                                        <a (click)="processBar()" [routerLink]="['/productList']"
+                                            [queryParams]="{categoriesId:item.id}"
+                                            routerLinkActive="router-link-ctive">{{
+                                            item.name }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" [ngClass]="{'active': currentUrl == '/contact-us'}"> <a class="nav-link" [routerLink]="['/contact-us']"
+                        routerLinkActive="router-link-active" >Contact Us</a>
+                </li>
+            </ul>
+            <div class="res-center">
+                <div class="relative">
+                    <img class="search-icon" routerLinkActive="router-link-active"
+                        src="../../../assets/images/Minimalistic-Magnifer.svg" alt="magnifier"/>
+                    <input placeholder="Search..." type="search" id="gsearch" name="gsearch" class="search-wrapper">
+                </div>
+            </div>
+            <div class="right-nav align-items-center d-flex justify-content-end left-space">
+                <a class="">
+                    <img [routerLink]="['/favourite']" routerLinkActive="router-link-active" src="../../../assets/images/like.svg" alt="like"
+                        *ngIf="login" />
+                </a>
+                <a class="d-flex align-items-center ms-3 relative" [routerLink]="['/productCart']"
+                    routerLinkActive="router-link-active" *ngIf="login">
+                    <img src="../../../assets/images/Cart-Large.svg" alt="cart" />
+                    <div class="count-badge" *ngIf="count > 0">
+                        <span >{{count }} </span>
+                    </div>
+                </a>
+                <a class="ms-3" [routerLink]="['/profile']" routerLinkActive="router-link-active"
+                    *ngIf="login; else userloggedOut">
+                    <img src="../../../assets/images/User.svg" alt="cart" *ngIf="login" />
+                </a>
+            </div>
+            <ng-template #userloggedOut>
+                <div class="right-nav align-items-center d-flex justify-content-end">
+                    <a class="me-3 d-sm-inline" data-toggle="modal" data-target="#login-modal"
+                        [ngClass]="{'non-login-wrapper':nonLoginCart}" id="login_signup">
+                        Login / Signup
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </nav>
+    <!-- <nav class="navbar navbar-expand-lg header-main-custom">
+        <div class="container-fluid res-no-space">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">  
+                <div class="w-100 d-flex justify-content-between res-between" 
+                id="navbarSupportedContent">
+                    <a class="navbar-brand" href="#">
+                        <img class="img-fluid img-wrapper" src="assets/e-commerce/images/logo_new1.png" alt="">
+                    </a>
+                    <ul class="navbar-nav header-ul">
+                        <li class="nav-item active">
+                            <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/productList']"
+                                routerLinkActive="router-link-active">Products</a>
+                        </li>
+                        <li class="nav-item dropdown position-static">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+                            <div class="dropdown-menu">
+                                <div class="container p-0">
+                                    <div class="row w-100 g-0">
+                                        <div class="row p-4 categoriesdiv">
+                                            <div class="col-12 col-md-3 col-sm-6" *ngFor="let item of result">
+                                                <a (click)="processBar()" [routerLink]="['/productList']"
+                                                    [queryParams]="{categoriesId:item.id}"
+                                                    routerLinkActive="router-link-ctive">{{
+                                                    item.name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" [routerLink]="['/contact-us']"
+                                routerLinkActive="router-link-active">Contact Us</a>
+                        </li>
+                    </ul>
+                    <div class="relative">
+                        <img class="search-icon" routerLinkActive="router-link-active"
+                            src="../../../assets/images/Minimalistic-Magnifer.svg" 
+                            alt="magnifier" *ngIf="login" />
+                        <input placeholder="Search..." type="search" 
+                        id="gsearch" name="gsearch" class="search-wrapper">
+                    </div>
+                    <div class="right-nav align-items-center d-flex justify-content-end left-space">
+                        <a class="">
+                            <img routerLinkActive="router-link-active" 
+                            src="../../../assets/images/like.svg" alt="like"
+                            *ngIf="login" />
+                        </a>
+                        <a class="d-flex align-items-center ms-3 relative" [routerLink]="['/productCart']"
+                            routerLinkActive="router-link-active" *ngIf="login">
+                            <img src="../../../assets/images/Cart-Large.svg" alt="cart" />
+                            <div class="count-badge">
+                                <span *ngIf="count > 0">{{count }} </span>
+                            </div>
+                        </a>
+                        <a class="ms-3" [routerLink]="['/profile']" routerLinkActive="router-link-active"
+                            *ngIf="login; else userloggedOut">
+                            <img src="../../../assets/images/User.svg" alt="cart" *ngIf="login" />
+                        </a>
+                    </div>
+                    <ng-template #userloggedOut>
+                        <div class="right-nav align-items-center d-flex justify-content-end">
+                            <a class="me-3 d-sm-inline" data-toggle="modal" data-target="#login-modal"
+                                [ngClass]="{'non-login-wrapper':nonLoginCart}" id="login_signup">
+                                Login / Signup
+                            </a>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+</header>
+<script src="assets/nirmalshreeUserInterface/js/theme.js"></script>
+<app-modal-dialog></app-modal-dialog>
+<!--header end-->

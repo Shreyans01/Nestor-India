@@ -1,0 +1,9 @@
+{
+    "/api": {
+        "target": "http://stagingapi.nirmalrecharge.com",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {"^/api" : ""},
+        "changeOrigin":true
+    }
+}

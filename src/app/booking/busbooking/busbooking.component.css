@@ -1,0 +1,26 @@
+.icon-inside {
+  right: 20px !important;
+  z-index: 0;
+}
+.selectCity {
+  padding: 0;
+  margin: 0;
+}
+.fromCity {
+  padding-left: 0 !important;
+}
+.toCity {
+  padding-right: 0 !important;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+}
+
+.autocomplete-container .input-container .x {
+  background: #fff;
+  z-index: 1;
+}

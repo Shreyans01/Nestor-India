@@ -1,0 +1,158 @@
+<app-e-commerce-header></app-e-commerce-header>
+<div id="content" class="contactUs">
+    <div class="page-header page-header-text-light bg-secondary">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h1 class="text-center contact-heading m-0">Contact Us</h1>
+                </div>
+                <div class="col-md-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row contact-map">
+                <div class="map-wrapper w-100">
+                    <div class="bg-white shadow-md rounded h-100 p-3">
+                        <iframe class="h-100 w-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.6986689445826!2d69.67521231403681!3d23.25404991347437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3950e1f882a2a293%3A0x952ed69d4423c6f0!2sNirmal%20Infoline%20Private%20Limited!5e0!3m2!1sen!2sin!4v1639141834497!5m2!1sen!2sin"
+                            allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="get-in-touch-wrapper">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="get-in-touch shadow-md rounded p-4">
+                            <h2 class="text-6 mb-4 text-white">Get in touch</h2>
+                            <p class="text-3  text-white mb-5">For Customer Support and Query, Get in touch with us: <a
+                                    class="text-white" href="#">Help</a>
+                            </p>
+                            <div class="featured-box style-1">
+                                <div class="featured-box-icon text-primary">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <p class=" text-white">Nestor India Private Limited<br>
+                                    A25, Swaminarayan avenue,<br>
+                                    Near bhatia samajvadi,<br>
+                                    Mundra relocation site,<br>
+                                    Bhuj - 370001, Gujarat.</p>
+                            </div>
+                            <div class="featured-box style-1">
+                                <div class="featured-box-icon text-primary">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <a class=" text-white" href="tel:+919408654777">+91 94086 54777</a>
+                            </div>
+                            <ul class="list-inline mb-0 contact-social mt-5 pt-5" style="margin-left:8px;">
+                                <li class="list-inline-item" style="font-size: 25px;"><a
+                                        href="https://www.facebook.com/nirmalrecharge"><i
+                                            class="la la-facebook text-white"></i></a>
+                                </li>
+                                <li class="list-inline-item" style="font-size: 25px;"><a
+                                        href="https://www.instagram.com/nirmal_infoline_pvt_ltd/"><i
+                                            class="la la-instagram text-white"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="mt-5 pt-5 pb-5 pr-4">
+                            <h4 class="text-center contact-thankyou-msg" style="color: green;" *ngIf="!Iserrormsg">{{
+                                result3 }}</h4>
+                            <form [formGroup]="contactForm" (ngSubmit)="contactAdd(contactForm.value)">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <strong>Full Name: </strong>
+                                            <input type="text" class="form-control" name="fullName"
+                                                formControlName="fullName" placeholder="Full Name" required>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.fullName.errors?.required">*Full
+                                                Name is required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.fullName.errors?.pattern">*Only
+                                                alphabets are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <strong>Mobile No: </strong>
+                                            <input type="text" class="form-control" name="mobileNo" [maxLength]=10
+                                                [minLength]=10 formControlName="mobileNo" placeholder="Mobile No"
+                                                required>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.mobileNo.errors?.required">*Mobile
+                                                no is required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.mobileNo.errors?.pattern">*Only
+                                                10 digit are required</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <strong>Message: </strong>
+                                            <textarea class="form-control" name="message" placeholder="Message"
+                                                formControlName="message" required rows="3"></textarea>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.message.errors?.required">*Message
+                                                is required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.message.errors?.pattern">*Only
+                                                alphabets are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-light buy-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="company-option ">
+        <div class="container-fluid">
+            <div class="row justify-content-between lr-space">
+                <div>
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/images/safe-shopping.svg" />
+                        <div class="ml-2">Safe Shopping</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/images/free-shipping-outline.svg" />
+                        <div class="ml-2">Free Shipping</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/images/Trusted_product.svg" />
+                        <div class="ml-2">Trusted Products</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/images/inclusive_task.svg" />
+                        <div class="ml-2">Inclusive Taxes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content end -->
+<app-e-commerce-footer></app-e-commerce-footer>
+
+<app-modal-dialog></app-modal-dialog>
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>

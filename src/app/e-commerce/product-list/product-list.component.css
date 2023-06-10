@@ -1,0 +1,308 @@
+#categories-collaps.collapse:not(.show) {
+    display: block;
+    height: 15rem;
+    overflow: hidden;
+}
+
+#categories-collaps.collapsing{
+    height: 15rem;
+}
+
+#brands-collaps.collapse:not(.show) {
+    display: block;
+    height: 15rem;
+    overflow: hidden;
+}
+
+#brands-collaps.collapsing{
+    height: 15rem;
+}
+.my-pagination .ngx-pagination .current {
+    /* background: red; */
+    background: #bc2c2f !important;
+    color: #000000 !important;
+}
+.my-pagination .ngx-pagination .small-screen {
+    display: none!important;
+}
+
+.pagination-previous {
+    display: flex;
+    align-items: center !important;
+}
+
+.brand-class {
+    cursor: pointer;
+}
+.product-details {
+    white-space: pre-wrap;
+}
+.product-details-list{
+    display: block;
+    height: 160px;
+    overflow: hidden;
+}
+.pagination-main.row{
+    /* float: right; */
+   
+}
+.page-link {
+    border-color: #DFE3E8 !important;
+    margin: 0 0.3rem;
+    background: #FFFFFF;
+    border: 1px solid #DFE3E8;
+    border-radius: 4px;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif !important;
+}
+.c-icon-size{
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+
+/* carousel top */
+
+.carousel-item .carousel-caption {
+    height: 100%;
+    display: flex !important;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    left: 0 !important;
+    padding: 50px;
+}
+
+.carousel-item .carousel-caption h4 {
+    font-weight: 700 !important;
+    font-size: 48px !important;
+    line-height: 60px !important;
+    color: #FFFFFF !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.carousel-item .carousel-caption h6 {
+    font-weight: 500 !important;
+    font-size: 40px !important;
+    line-height: 50px !important;
+    color: #FFFFFF !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+/* carousel end */
+.body-content-space{
+    padding:  0 35px;
+}
+.breadcrumb-item {
+    font-weight: 500;
+font-size: 20px;
+color: #A6A6A6;
+font-family: 'Outfit', sans-serif !important;
+}
+.breadcrumb-item.active {
+    font-weight: 500;
+font-size: 20px;
+color: #0C2F54;
+font-family: 'Outfit', sans-serif !important;
+}
+.breadcrumb-item+.breadcrumb-item {
+    padding-left: 1.5rem;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    padding-right: 20px;
+    padding-top: 3px;
+}
+.header-section {
+    padding: 50px 35px;
+    padding-top: 50px !important;
+    padding-bottom: 0 !important;
+}
+
+.c-select{
+    width: 158px;
+height: 55px;
+border: 1px solid #0C2F54;
+font-weight: 500;
+font-size: 18px;
+line-height: 23px;
+color: #0C2F54;
+padding: 15px !important;
+font-family: 'Outfit', sans-serif !important;
+}
+.header-text{
+    font-weight: 500;
+font-size: 20px;
+line-height: 25px;
+color: #0C2F54;
+font-family: 'Outfit', sans-serif !important;
+}
+.pb-50{
+    padding-bottom: 50px;
+}
+.pt-50{
+    padding-top: 50px;
+}
+.pt-30{
+    padding-top: 30px;
+}
+.p-15{
+    padding: 15px;
+}
+.product-list-card{
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.product-list-card .card-image{
+    height: 268px;
+    width: 100%;
+    overflow: hidden;
+}
+.product-list-card .card-image img {
+    height: 268px;
+    width: 100%;
+    object-fit: cover !important;
+}
+.card-content .small-text{
+    color: #A6A6A6;
+    font-weight: 500;
+font-size: 16px;
+line-height: 140%;
+font-family: 'Outfit', sans-serif !important;
+}
+.card-content .h4{
+    color: #0C2F54;
+    font-weight: 600;
+font-size: 24px;
+line-height: 140%;
+font-family: 'Outfit', sans-serif !important;
+}
+.card-content button{
+    color: #fff;
+    background: #0C2F54;
+    border: none;
+}
+.small-color-text{
+    font-weight: 400;
+font-size: 14px;
+line-height: 140%;
+color: #0C2F54;
+font-family: 'Outfit', sans-serif !important;
+}
+.price-text{
+    font-weight: 500;
+font-size: 22px;
+line-height: 140%;
+color: #0C2F54;
+font-family: 'Outfit', sans-serif !important;
+}
+.price-text .delete-text{
+    font-weight: 500;
+font-size: 22px;
+line-height: 140%;
+color: #A6A6A6;
+font-family: 'Outfit', sans-serif !important;
+}
+.card-heading{
+    padding: 15px;
+    border-bottom: 1px solid #DBDBDB;
+}
+.card-heading h5{
+    float: left;
+    padding: 5px;
+    border-bottom: 2px solid #0C2F54;
+    font-weight: 500;
+font-size: 18px;
+line-height: 23px;
+color: #0C2F54;
+font-family: 'Outfit', sans-serif !important;
+}
+.card-section-heading{
+    font-weight: 600;
+font-size: 18px;
+line-height: 23px;
+color: #000000;
+font-family: 'Outfit', sans-serif !important;
+}
+.form-check {
+    padding-left: 0;
+}
+.form-check .form-check-input{
+    height: 20px;
+    width: 20px;
+    margin-left: 0;
+    margin-top:0
+}
+.form-check-label{
+    margin-left: 35px;
+}
+.mt-105{
+    margin-top: 105px;
+}
+.dropdownArrow-icon img{
+    position: absolute;
+    right: 30px;
+    top: 25px;
+}
+.option-wrapper {
+
+}
+.option-wrapper .option-icon{
+
+}
+.my-list-pagination{
+    text-align: center;
+}
+@media screen and (max-width:991px) {
+    .product-list-card {
+        height: 100%;
+    }
+    .res-product-list-card {
+        height: unset;
+    }
+}
+@media screen and (max-width:767px) {
+    .mt-105 {
+        margin-top: 15px !important;
+    }
+    .c-res-col-reverse{
+        flex-direction: column-reverse;
+    }
+    .pt-50 {
+        padding-top: 20px;
+    }
+    .pb-50 {
+        padding-bottom: 20px;
+    }
+    .res-mb-30{
+        margin-bottom: 30px;
+    }
+    .res-filter-col {
+        display: flex;
+    }
+    .res-filter-col .p-4{
+        padding: 0.5rem !important;
+    }
+    .border-bottom{
+        border: none !important;
+    }
+    .body-content-space{
+        padding: 0 5px;
+    }
+}
+@media screen and (max-width:575px) {
+    .breadcrumb-item + .breadcrumb-item {
+        padding-left: 0.5rem !important;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+        padding-right: 10px !important;
+    }
+}
+

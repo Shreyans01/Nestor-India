@@ -1,0 +1,122 @@
+<app-e-commerce-header></app-e-commerce-header>
+<div id="content" class="contactUs">
+    <div class="page-header page-header-text-light bg-secondary">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+                <div class="col-6">
+                    <h1 class="text-center contact-heading m-0">MY PROFILE</h1>
+                </div>
+                <div class="col-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="myProfile">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="profile-info">
+                        <div class="profile-name">Kristin Watson</div>
+                        <div class="profile-contact">+91 98547 54201</div>
+                    </div>
+                   
+                </div>
+                <div class="col-lg-4">
+                    <app-profile-menu></app-profile-menu>
+                </div>
+                <div class="col-lg-8">
+                    <form [formGroup]="profileForm" (ngSubmit)="profileUpdate(profileForm.value)">
+                        
+                        <div class="row">
+                            <div>
+                                <h6 style="color: red;">{{ result }}</h6>
+                            </div>
+                            
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput formControlName="firstName" data-bv-field="firstName" name="firstName" required placeholder="First Name">
+                                    <span class="error"
+                                    *ngIf="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched">*First
+                                    name required,only alphabets are allowed</span>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput formControlName="lastName"
+                                    data-bv-field="lastName" name="lastName" placeholder="Last Name">
+                                    <span class="error"
+                                    *ngIf="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched">*Last
+                                    name required,only alphabets are allowed</span>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Email Address</mat-label>
+                                    <input matInput type="email" formControlName="email" value="jhonecary2018@gmail.com"
+                                     data-bv-field="emailid" name="email" placeholder="Email ID">
+                                     <span class="error"
+                                     *ngIf="profileForm.controls.email.invalid && profileForm.controls.email.touched">*Email
+                                     Address required,(Ex: emample@xyz.com)</span>
+                               </mat-form-field>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Mobile Number</mat-label>
+                                    <input matInput type="text" formControlName="mobileNo"  name="mobileNo" placeholder="Mobile Number">
+                                    <span class="error"
+                                    *ngIf="profileForm.controls.mobileNo.invalid && profileForm.controls.mobileNo.touched">*Mobile
+                                    no required,only 10 digit are allow</span>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Address Line 1</mat-label>
+                                    <input matInput type="text" placeholder="Address Line 1">                                   
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Address Line 2</mat-label>
+                                    <input matInput type="text" placeholder="Address Line 2">                                   
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>PinCode</mat-label>
+                                    <input matInput type="text" placeholder="PinCode">                                   
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>State</mat-label>
+                                    <input matInput type="text" placeholder="State">                                   
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-lg-5">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>City</mat-label>
+                                    <input matInput type="text" placeholder="City">                                   
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <button [disabled]="profileForm.invalid" role="button" class=" c-save-btn btn-animated"
+                                    type="submit">Save</button>
+                                    
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <app-e-commerce-footer></app-e-commerce-footer> -->

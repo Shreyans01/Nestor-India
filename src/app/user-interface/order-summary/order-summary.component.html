@@ -1,0 +1,143 @@
+<!-- <app-header></app-header> -->
+<div id="content">
+
+    <div class="col-lg-12 text-center mt-5">
+        <h2 class="text-8">Order Summary</h2>
+        <p class="lead">Confirm details</p>
+    </div>
+    <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
+        <div class="bg-white shadow-sm rounded p-3 p-sm-4 mb-0 mb-sm-4">
+            <!-- <div *ngIf="BillPaymentField; else noFetchData"> -->
+
+            <div class="row " *ngFor="let item of BillPaymentField | keyvalue">
+                <span class="col-md-12 d-flex"
+                    *ngIf="item.key != 'amount' && item.key != 'value' && item.key != 'operator' && item.key != 'Amount' && item.key != 'promocodeType' ">
+
+                    <p class="col-sm text-muted mb-0 mb-sm-3 inline-block">{{item.key}}:</p>
+                    <p class="col-sm text-sm-right font-weight-500">{{item.value}}</p>
+
+                </span>
+            </div>
+            <!-- </div> -->
+            <!-- <ng-template #noFetchData> -->
+            <!-- <div class="row d-flex" *ngFor="let item of BillPaymentNoFetchFieldValue | keyvalue">
+                
+            
+                    <p class="col-sm text-muted mb-0 mb-sm-3 inline-block">{{item.key}}:</p>
+                    <p class="col-sm text-sm-right font-weight-500">{{item.value}}</p>
+            
+                
+            </div> -->
+            <!-- </ng-template> -->
+            <!-- <div class="row">
+            <p class="col-sm text-muted mb-0 mb-sm-3">Operator:</p>
+            <p class="col-sm text-sm-right font-weight-500">Vodafone | Gujarat</p>
+        </div>
+        <div class="row">
+            <p class="col-sm text-muted mb-0 mb-sm-3">Plan:</p>
+            <p class="col-sm text-sm-right font-weight-500">Mobile top-up</p>
+        </div>
+        <div class="row">
+            <p class="col-sm text-muted mb-0 mb-sm-3">Validity:</p>
+            <p class="col-sm text-sm-right font-weight-500">Talktime</p>
+        </div>
+        <div class="row">
+            <p class="col-sm text-muted mb-0 mb-sm-3">Amount:</p>
+            <p class="col-sm text-sm-right font-weight-500">$150</p>
+        </div>
+        <div class="row">
+            <p class="col-12 text-muted mb-0">Plan Description:</p>
+            <p class="col-12 text-1">Local calls free & STD calls free & Roaming Incoming & Outgoing calls free & 300
+                Local & National SMS & 1 GB 3G/4G Data & Data Validity 28 day(s) & For 3G/4G user - T&C apply</p>
+        </div> -->
+
+
+            <div class="bg-light-4 rounded p-3">
+                <div class="row payment_amount_value">
+                    <div class="col-sm text-3 font-weight-600">Payment Amount</div>
+                    <div class="col-sm text-sm-right text-5 font-weight-500"
+                        *ngIf="BillPaymentField.amount; else noBillPayment"><i class="fas fa-rupee-sign"></i> {{
+                        BillPaymentField.amount }}</div>
+                    <ng-template #noBillPayment>
+                        <div class="col-sm text-sm-right text-5 font-weight-500" *ngIf="BillPaymentValue"><i
+                                class="fas fa-rupee-sign"></i> {{ BillPaymentValue }} </div>
+                    </ng-template>
+                </div>
+
+            </div>
+
+            <p class="text-center my-4"><a class="btn-link" data-toggle="collapse" href="#couponCode"
+                    aria-expanded="false" aria-controls="couponCode">Apply a Coupon Code</a></p>
+            <form [formGroup]="promocodeForm" (ngSubmit)="promocodes(promocodeForm.value)">
+                <div id="couponCode" class="bg-light-3 p-4 rounded collapse">
+                    <h3 class="text-4">Coupon Code</h3>
+                    <div class="input-group form-group mb-0">
+                        <input class="form-control" #promocod formControlName="promocode" name="promocode"
+                            placeholder="Coupon Code" aria-label="Promo Code" type="text">
+
+                        <span class="input-group-append">
+                            <button class="btn btn-secondary" (click)="promo(promocod.value)"
+                                type="submit">APPLY</button>
+                        </span>
+
+                    </div>
+                    <div *ngIf="!promocodValidation">
+                        <span class="error" *ngIf="(submitted && getForm.promocode.errors?.required)">Promocode
+                            required</span>
+                        <span class="error" *ngIf="(submitted && getForm.promocode.errors?.pattern)">Promocode
+                            invalid</span>
+                    </div>
+                    <!-- <span class="success">{{ this.result4 }}</span>
+                    <span class="error">{{ this.result3 }}</span> -->
+
+                </div>
+            </form>
+
+            <form [formGroup]="PaymentForm" (ngSubmit)="payment(PaymentForm.value)">
+                <div class="col-md-12 mt-4">
+                    <label class="mb-1">Payment Mode</label><br>
+                    <div class="form-group mb-md-0" id="payment_class">
+                        <!-- <input type="text" formControlName="paymentMode" name="paymentMode"
+                                                        class="form-control" placeholder="Payment Mode"> -->
+                        <!-- <select class="custom-select" (change)="setPayMethod($event)"> -->
+                        <!-- <label class="radio_img">
+                                                            <input type="radio" name="layout" value="UPI" />
+                                                            <div class="image payment_img upi_cls"></div>
+                                                          </label> -->
+
+                        <label class="radio_img">
+                            <input type="radio" formControlName="layout" value="Gateway" />
+                            <div class="image payment_img razorpay_cls"></div>
+                            <label class="payment_mode_name">Cards / Netbanking</label>
+                        </label>
+                        <label class="radio_img">
+                            <input type="radio" formControlName="layout" value="Wallet" />
+                            <div class="image payment_img wallet_cls"></div>
+                            <label class="payment_mode_name">Wallet</label>
+                        </label>
+                        <!-- <label class="radio_img">
+                                                            <input type="radio" formControlName="layout" value="" />
+                                                            <div class="image payment_img"></div>
+                                                          </label> -->
+                        <!-- <label class="radio_img">
+                    <label class="payment_mode_name">COD</label>
+                    <input type="radio" formControlName="layout" checked value="COD" />
+                    <div class="image payment_img cod_cls"></div>
+                </label> -->
+                        <!-- <option [value]="method" *ngFor="let method of payment_methods; let i = index;" [selected]="i == 0">{{  method  }}</option> -->
+                        <!-- </select> -->
+                        <!-- <span class="error"
+                    *ngIf="checkOutForm.controls.paymentMode.invalid && checkOutForm.controls.paymentMode.touched">*Payment
+                    Mode Required.</span> -->
+                    </div>
+                </div>
+                <p class="mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Make Payment</button></p>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<!-- Content end -->
+<!-- <app-footer></app-footer> -->
+<!-- <app-modal-dialog></app-modal-dialog> -->

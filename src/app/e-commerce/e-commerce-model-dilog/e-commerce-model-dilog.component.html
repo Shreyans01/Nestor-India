@@ -1,0 +1,225 @@
+<!-- page wrapper end -->
+
+<!-- Cart Modal -->
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+<div class="modal fade cart-modal" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Your Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" #closeBtn1 aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <div *ngIf="result2; else noData">   
+                    <div class="row align-items-center" *ngFor="let item of result2.Cart">
+                        <div class="col-5 d-flex align-items-center">
+                            <div class="me-4">
+                                <!-- <button type="submit" data-bs-toggle="modal" data-bs-target="#cartModal" #product
+                                    (click)='productIds(product.value)' [value]="item.productId"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="las la-times"></i>
+                                </button> -->
+                                <button type="submit" #ProductId (click)="ProductValue(ProductId.value)" [value]="item.productId"
+                                    class="btn btn-primary btn-sm" data-toggle="modal" data-target="#CartConfirmation"
+                                    title="Product Remove form Cart">
+                                    <i class="las la-times"></i>
+                                </button>
+                            </div>
+                            <!-- Image -->
+                            <a>
+                                <img class="img-fluid" src="{{ item.mainImage }}" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <!-- Title -->
+                            <h6><a class="link-title">{{ item.product }}</a></h6>
+                            <div class="product-meta"><span class="me-2 text-primary"> {{ item.retailPrice
+                                    }}</span><span class="text-muted">x {{ item.qty }} = {{ rupee_sym }} {{ item.total
+                                    }}</span>
+                            </div>
+                        </div>
+
+                        <hr class="my-5">
+                    </div>
+                        <hr class="my-5">
+                    
+                    <!-- <a [routerLink]="['/e-commerce/productCheckout']" routerLinkActive="router-link-active" data-bs-dismiss="modal"
+                        class="btn btn-dark"><i class="las la-money-check me-1"></i>Continue
+                        To Checkout</a> -->
+                </div>
+                <ng-template #noData>
+                    <span class="error">{{ result }}</span>
+                </ng-template>
+                <a class="btn btn-primary btn-animated me-2" data-bs-dismiss="modal" [routerLink]="['/productCart']"><i
+                        class="las la-shopping-cart me-1"></i>View
+                    Cart</a>
+                <a class="btn btn-dark btn-animated ml-2" data-bs-dismiss="modal" [routerLink]="['/productList']"
+                    routerLinkActive="router-link-active"><i class="las la-shopping-cart me-1"></i>Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="CartConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" #closeBtn data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this product from cart ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" #product (click)='productIds(product.value)' [value]="productId"
+                    class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Quick View Modal -->
+<!-- <div class="modal fade view-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-12">
+                        <img class="img-fluid rounded" src="assets/e-commerce/images/product/large/01.jpg" alt="" />
+                    </div>
+                    <div class="col-lg-7 col-12 mt-5 mt-lg-0">
+                        <div class="product-details">
+                            <h3 class="mb-0">Women Sweater</h3>
+                            <div class="star-rating mb-4"><i class="las la-star"></i><i class="las la-star"></i><i
+                                    class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i>
+                            </div> <span class="product-price h4">$25.00 <del class="text-muted h6">$35.00</del></span>
+                            <ul class="list-unstyled my-4">
+                                <li class="mb-2">Availibility: <span class="text-muted"> In Stock</span>
+                                </li>
+                                <li>Categories :<span class="text-muted"> Women's</span>
+                                </li>
+                            </ul>
+                            <p class="mb-4">Nulla eget sem vitae eros pharetra viverra Nam vitae luctus ligula
+                                suscipit risus nec eleifend Pellentesque eu quam sem, ac malesuada</p>
+                            <div class="d-sm-flex align-items-center mb-5">
+                                <div class="d-flex align-items-center me-sm-4">
+                                    <button class="btn-product btn-product-up"> <i class="las la-minus"></i>
+                                    </button>
+                                    <input class="form-product" type="number" name="form-product" value="1">
+                                    <button class="btn-product btn-product-down"> <i class="las la-plus"></i>
+                                    </button>
+                                </div>
+                                <select class="form-select w-auto mt-3 mt-sm-0">
+                                    <option selected>Size</option>
+                                    <option value="1">XS</option>
+                                    <option value="2">S</option>
+                                    <option value="3">M</option>
+                                    <option value="4">L</option>
+                                    <option value="5">XL</option>
+                                    <option value="6">XXL</option>
+                                </select>
+                                <div class="d-flex text-center ms-sm-4 mt-3 mt-sm-0 widget-color">
+                                    <div class="form-check ps-0 me-3">
+                                        <input type="radio" class="form-check-input" id="color-filter01" name="Radios">
+                                        <label class="form-check-label" for="color-filter01"
+                                            data-bg-color="#3cb371"></label>
+                                    </div>
+                                    <div class="form-check ps-0 me-3">
+                                        <input type="radio" class="form-check-input" id="color-filter02" name="Radios"
+                                            checked>
+                                        <label class="form-check-label" for="color-filter02"
+                                            data-bg-color="#4876ff"></label>
+                                    </div>
+                                    <div class="form-check ps-0 me-3">
+                                        <input type="radio" class="form-check-input" id="color-filter03" name="Radios">
+                                        <label class="form-check-label" for="color-filter03"
+                                            data-bg-color="#0a1b2b"></label>
+                                    </div>
+                                    <div class="form-check ps-0">
+                                        <input type="radio" class="form-check-input" id="color-filter04" name="Radios">
+                                        <label class="form-check-label" for="color-filter04"
+                                            data-bg-color="#f94f15"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-sm-flex align-items-center mt-5">
+                                <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"><i
+                                        class="las la-shopping-cart me-1"></i>Add To Cart</button>
+                                <a class="btn btn-animated btn-dark" href="#"> <i class="lar la-heart me-1"></i>Add
+                                    To Wishlist</a>
+                            </div>
+                            <div class="d-sm-flex align-items-center border-top pt-4 mt-5">
+                                <h6 class="mb-sm-0 me-sm-4">Share It:</h6>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a class="bg-white shadow-sm rounded p-2" href="#"><i
+                                                class="la la-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a class="bg-white shadow-sm rounded p-2" href="#"><i
+                                                class="la la-dribbble"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a class="bg-white shadow-sm rounded p-2" href="#"><i
+                                                class="la la-instagram"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a class="bg-white shadow-sm rounded p-2" href="#"><i
+                                                class="la la-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a class="bg-white shadow-sm rounded p-2" href="#"><i
+                                                class="la la-linkedin"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Subscribe Modal -->
+<!-- <div class="modal fade" id="mailchimpModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" data-bg-img="assets/e-commerce/images/bg/08.png">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="mb-4">
+                    <h6 class="text-primary mb-1">
+                        — Newsletter
+                    </h6>
+                    <h2 class="mb-0">Subscribe get notified!</h2>
+                </div>
+                <div class="subscribe-form">
+                    <form id="mc-form1" class="row align-items-center g-0 mb-3">
+                        <div class="col">
+                            <input value="" name="EMAIL" class="email form-control input-2 bg-white" id="mc-email1"
+                                placeholder="Email Address" required="" type="email">
+                        </div>
+                        <div class="col-auto">
+                            <input class="btn btn-primary overflow-auto" name="subscribe" value="Subscribe"
+                                type="submit">
+                        </div>
+                    </form> <small>Get started for 1 Month free trial No Purchace required.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

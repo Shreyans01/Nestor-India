@@ -1,0 +1,604 @@
+<!-- Document Wrapper end -->
+
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+<!-- Back to Top
+============================================= -->
+
+<a data-toggle="modal" #login2 data-target="#login-modal"></a>
+
+<!-- Modal Dialog - View Plans
+============================================= -->
+<!-- <div id="view-plans" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Browse Plans</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                        aria-hidden="true">×</span> </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-row mb-4 mb-sm-2" method="post">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="form-group">
+                            <select class="custom-select" required="">
+                                <option value="">Select Your Operator</option>
+                                <option>1st Operator</option>
+                                <option>2nd Operator</option>
+                                <option>3rd Operator</option>
+                                <option>4th Operator</option>
+                                <option>5th Operator</option>
+                                <option>6th Operator</option>
+                                <option>7th Operator</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="form-group">
+                            <select class="custom-select" required="">
+                                <option value="">Select Your Circle</option>
+                                <option>1st Circle</option>
+                                <option>2nd Circle</option>
+                                <option>3rd Circle</option>
+                                <option>4th Circle</option>
+                                <option>5th Circle</option>
+                                <option>6th Circle</option>
+                                <option>7th Circle</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="form-group">
+                            <select class="custom-select" required="">
+                                <option value="">All Plans</option>
+                                <option>Topup</option>
+                                <option>Full Talktime</option>
+                                <option>Validity Recharge</option>
+                                <option>SMS</option>
+                                <option>Data</option>
+                                <option>Unlimited Talktime</option>
+                                <option>STD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <button class="btn btn-primary btn-block" type="submit">View Plans</button>
+                    </div>
+                </form>
+                <div class="plans">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$10<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">8<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">7 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Talktime $8 & 2 Local & National SMS
+                            & Free SMS valid for 2 day(s)</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$15<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">13<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">15 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Regular Talktime</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$50<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">47<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">28 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">47 Local Vodafone min free </div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$100<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">92<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">28 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Local min 92 & 10 Local & National
+                            SMS & Free SMS valid for 28 day(s).</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$150<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">143<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">60 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Talktime $143 & 50 Local & National
+                            SMS & Free SMS valid for 60 day(s).</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$220<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">8 <span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">7 Days <span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$250<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">250<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">28 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime + 50 SMS per day for 28
+                            days.</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$300<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">301<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">64 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$410<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">0<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">28 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Unlimited Local,STD & Roaming calls
+                        </div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$501<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">510<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">180 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime + 100 SMS per day for
+                            180 days.</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$799<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">820<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">250 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime + 100 SMS per day for
+                            250 days.</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-lg-2 text-5 text-primary text-center">$999<span
+                                class="text-1 text-muted d-block">Amount</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">1099<span
+                                class="text-1 text-muted d-block">Talktime</span></div>
+                        <div class="col-4 col-lg-2 text-3 text-center">356 Days<span
+                                class="text-1 text-muted d-block">Validity</span></div>
+                        <div class="col-7 col-lg-3 my-2 my-lg-0 text-1 text-muted">Full Talktime + 100 SMS per day for
+                            356 days.</div>
+                        <div class="col-5 col-lg-3 my-2 my-lg-0 text-right text-lg-center"><button
+                                class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                type="submit">Recharge</button></div>
+                    </div>
+                    <hr class="my-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- Modal Dialog - View Plans end -->
+
+<!-- Login Modal
+=========================== -->
+<div id="login-modal" class="modal login hidden" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body py-4 px-0">
+                <button type="button" class="close close-outside" data-dismiss="modal" #closeBtn aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+
+                <!-- Login Form
+        ====================== -->
+                <div class="row">
+                    <div id="ht-preloader" *ngIf="isLoading">
+                        <div class="loader clear-loader">
+                            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-10 mx-auto">
+                        <ul class="nav nav-tabs nav-justified mb-4" role="tablist">
+                            <li class="nav-item"> <a class="nav-link text-5 line-height-3 active">Login</a> </li>
+                            <li class="nav-item"> <a class="nav-link text-5 line-height-3" href="" data-toggle="modal"
+                                    data-target="#signup-modal" data-dismiss="modal">Sign Up</a> </li>
+                        </ul>
+                        <p class="text-4 font-weight-300 text-muted text-center mb-4">We are glad to see you again!</p>
+                        <form [formGroup]="LoginForm" (ngSubmit)="login(LoginForm.value, content)">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="firstname" formControlName="username"
+                                    name="username" required placeholder="Email address / Mobile number">
+                                <span class="error"
+                                    *ngIf="submittedLogin && errorCtrLogin.username.errors?.required">*Email
+                                    address / mobile number required.</span>
+                                <span class="error"
+                                    *ngIf="submittedLogin && errorCtrLogin.username.errors?.pattern">*Please provide
+                                    valid Email
+                                    address / 10 digit mobile number.</span>
+
+                                <!-- <span class="error" *ngIf="LoginForm.controls.emailAddress.invalid && LoginForm.controls.emailAddress.touched">*Email address is required,(Email: example@xyz.com)</span> -->
+                            </div>
+                            <!--  <h5 class="text-center"><b>OR</b></h5>
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="mobileNo" name="mobileNo" required
+                                    placeholder="Mobile No">
+                                <span class="error" *ngIf="LoginForm.controls.mobileNo.invalid && LoginForm.controls.mobileNo.touched">*Mobile no is required,only 10 digit are allow</span>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <input type="password" class="form-control" name="password" formControlName="password"
+                                    required placeholder="password">
+                                <span class="error"
+                                    *ngIf="submittedLogin && errorCtrLogin.password.errors?.required">*Password
+                                    is required</span>
+                            </div> -->
+                            <!-- <div class="row my-4">
+                                <div class="col">
+                                    <div class="form-check text-2 custom-control custom-checkbox">
+                                        <input id="remember-me" name="remember" class="custom-control-input"
+                                            type="checkbox">
+                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                    </div>
+                                </div>
+                                <div class="col text-2 text-right"><a class="btn-link" href="" data-toggle="modal"
+                                        data-target="#forgot-password-modal" data-dismiss="modal">Forgot Password ?</a>
+                                </div>
+                            </div> -->
+                            <div>
+                                <h6 style="color: red;">{{ result2 }}</h6>
+                            </div>
+                            <button class="btn btn-primary btn-block my-4" id="login-btn" type="button" (click)="login(LoginForm.value, content)"><span class="button__text">Login</span></button>
+
+                        </form>
+                        <div class="d-flex align-items-center my-3">
+                            <hr class="flex-grow-1">
+                            <span class="mx-2 text-2 text-muted">Or Login with Social Profile</span>
+                            <hr class="flex-grow-1">
+                        </div>
+                        <div class="d-flex  flex-column align-items-center mb-3">
+                            <ul class="social-icons social-icons-colored social-icons-circle">
+                                <li class="social-icons-facebook"><a href="https://www.facebook.com/nirmalrecharge"
+                                        data-toggle="tooltip" data-original-title="Log In with Facebook"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li class="social-icons-instagram"><a
+                                        href="https://www.instagram.com/nirmal_infoline_pvt_ltd/" data-toggle="tooltip"
+                                        data-original-title="instagram"><i class="fab fa-instagram"></i></a></li>
+                                <li class="social-icons-twitter"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Log In with Twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li class="social-icons-linkedin"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Log In with Linkedin"><i
+                                            class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <p class="text-2 text-center mb-0">New to Nestor India? <a class="btn-link" data-toggle="modal"
+                                data-target="#signup-modal" data-dismiss="modal">Sign Up</a></p>
+                    </div>
+                </div>
+                <!-- Login Form End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Modal End -->
+
+<!-- Sign Up Modal
+=========================== -->
+<div id="signup-modal" class="modal signUp" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body py-4 px-0">
+                <button type="button" class="close close-outside" data-dismiss="modal" #closeSignUp aria-label="Close"> <span
+                        aria-hidden="true">&times;</span> </button>
+                <!-- Sign Up Form
+        ====================== -->
+                <div class="row">
+                    <div class="col-11 col-md-10 mx-auto">
+                        <ul class="nav nav-tabs nav-justified mb-4" role="tablist">
+                            <li class="nav-item"> <a class="nav-link text-5 line-height-3" href="" data-toggle="modal"
+                                    data-target="#login-modal" #openBtn1 data-dismiss="modal">Log In</a> </li>
+                            <li class="nav-item"> <a class="nav-link text-5 line-height-3 active">Sign Up</a> </li>
+                        </ul>
+                        <p class="text-4 font-weight-300 text-muted text-center mb-4">Looks like you're new here!</p>
+                        <div id="ht-preloader" *ngIf="isLoading">
+                            <div class="loader clear-loader">
+                                <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+                            </div>
+                        </div>
+
+                        <form [formGroup]="SignUpForm" (ngSubmit)="signup(SignUpForm.value)">
+
+                            <div class="form-group">
+                                <input type="text" formControlName="firstName" class="form-control border-2"
+                                    name="firstName" required placeholder="First Name">
+                                <span class="error" *ngIf="submitted && errorCtr.firstName.errors?.required">*First
+                                    Name required</span>
+                                <span class="error" *ngIf="submitted && errorCtr.firstName.errors?.pattern">*Only
+                                    alphabets are allow</span>
+                                <span class="error"
+                                    *ngIf="submitted && errorCtr.firstName.errors?.whitespace">*Whitespace is not
+                                    allowed</span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" formControlName="lastName" class="form-control border-2"
+                                    name="lastName" required placeholder="Last Name">
+                                <span class="error" *ngIf="submitted && errorCtr.lastName.errors?.required">Last
+                                    Name required</span>
+                                <span class="error" *ngIf="submitted && errorCtr.lastName.errors?.pattern">Only
+                                    alphabets are allow</span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control border-2" formControlName="email" name="email"
+                                    placeholder="Email Address">
+                                <!-- <span class="error" *ngIf="submitted && errorCtr.email.errors?.required">*Email
+                                    Address Required(Ex: emample@xyz.com)</span> -->
+                                <span class="error" *ngIf="submitted && errorCtr.email.errors?.pattern">Please provide valid email id</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-2" name="mobileNo"
+                                    formControlName="mobileNo" required placeholder="Mobile No">
+                                <span class="error" *ngIf="submitted && errorCtr.mobileNo.errors?.required">*Mobile
+                                    no required</span>
+                                <span class="error" *ngIf="submitted && errorCtr.mobileNo.errors?.pattern">*Only 10
+                                    digit are allow</span>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-2" name="password"
+                                    formControlName="password" required placeholder="Password">
+                                <span class="error" *ngIf="submitted && errorCtr.password.errors?.required">*Password
+                                    required</span>
+                                <span class="error" *ngIf="submitted && errorCtr.password.errors?.minlength">*Minimum 8
+                                    character password required</span>
+                            </div>
+                            <div class="form-group my-4">
+                                <div class="form-check text-2 custom-control custom-checkbox">
+                                    <input id="agree" name="agree" class="custom-control-input" required type="checkbox"
+                                        formControlName="accept" [checked]="isChecked" (change)="chekedBox($event)">
+                                    <label class="custom-control-label" for="agree">I agree to the <a
+                                            [routerLink]="['/terms']" (click)="closeSign()" routerlinkactive="router-link-active"> Terms</a>
+                                        and <a [routerLink]="['/privacy']" (click)="closeSign()" routerlinkactive="router-link-active">Privacy
+                                            Policy</a>.</label>
+                                </div>
+                                <span class="error" *ngIf="submitted && !isChecked">*Term
+                                    & Condition is required</span>
+                            </div>
+                            <div>
+                                <h6 style="color: green;">{{ result3 }}</h6>
+                            </div>
+
+                            <button class="btn btn-primary btn-block my-4 button" id="signup-Btn" type="submit"><span class="button__text"></span> Sign Up</button>
+
+                        </form>
+                        <div class="d-flex align-items-center my-3">
+                            <hr class="flex-grow-1">
+                            <span class="mx-2 text-2 text-muted">Or Sign Up with Social Profile</span>
+                            <hr class="flex-grow-1">
+                        </div>
+                        <div class="d-flex  flex-column align-items-center mb-3">
+                            <ul class="social-icons social-icons-colored social-icons-circle">
+                                <li class="social-icons-facebook"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Sign Up with Facebook"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li class="social-icons-twitter"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Sign Up with Twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li class="social-icons-google"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Sign Up with Google"><i class="fab fa-google"></i></a></li>
+                                <li class="social-icons-linkedin"><a href="#" data-toggle="tooltip"
+                                        data-original-title="Sign Up with Linkedin"><i
+                                            class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <p class="text-2 text-center mb-0">Already have an account? <a class="btn-link" href=""
+                                data-toggle="modal" data-target="#login-modal" data-dismiss="modal">Log In</a></p>
+                    </div>
+                </div>
+                <!-- Sign Up Form End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sign Up Modal End -->
+
+<!-- Forgot Password Modal
+============================== -->
+<div id="forgot-password-modal" class="modal forgot" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body py-4 px-0">
+                <button type="button" class="close close-outside" data-dismiss="modal" #closeBtn1 aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+                <!-- Forgot Password Form
+        =========================== -->
+                <div class="row">
+
+                    <div id="ht-preloader" *ngIf="isLoading">
+                        <div class="loader clear-loader">
+                            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-11 col-md-10 mx-auto">
+                        <h3 class="text-center mt-3 mb-4">Forgot your password?</h3>
+                        <p class="text-center text-3 text-muted">Enter your Email or Mobile and we’ll help you reset
+                            your password.</p>
+                        <form [formGroup]="ForgotForm" (ngSubmit)="forgot(ForgotForm.value)">
+                            <div class="form-group">
+                                <input type="text" formControlName="username" class="form-control border-2"
+                                    name="username" required placeholder="Email address / Mobile number">
+                                <span class="error"
+                                    *ngIf="submittedForgot && errorCtrForgot.username.errors?.required">*Email
+                                    address / mobile number required.</span>
+                                <span class="error"
+                                    *ngIf="submittedForgot && errorCtrForgot.username.errors?.pattern">*Please provide
+                                    valid Email
+                                    address / 10 digit mobile number .</span>
+                            </div>
+                            <div>
+                                <h6 style="color: red;">{{ result4 }}</h6>
+                            </div>
+                            <button class="btn btn-primary btn-block my-4 button" id="forgot-btn" type="submit"><span class="button__text">Continue</span></button>
+                        </form>
+                        <p class="text-center mb-0"><a class="btn-link" href="" data-toggle="modal"
+                                data-target="#login-modal" data-dismiss="modal">Return to Log In</a> <span
+                                class="text-muted mx-3"></span> <a class="btn-link" href="" #openBtn data-toggle="modal"
+                                data-target="#otp-modal" data-dismiss="modal"></a></p>
+                    </div>
+                </div>
+                <!-- Forgot Password Form End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Forgot Password Modal End -->
+
+<!-- OTP Modal
+============================== -->
+<div id="otp-modal" class="modal OTP" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body py-4 px-0">
+                <button type="button" class="close close-outside" data-dismiss="modal" #closeBtn2 aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+                <!-- OTP Form
+        =========================== -->
+                <div class="row">
+
+                    <div id="ht-preloader" *ngIf="isLoading">
+                        <div class="loader clear-loader">
+                            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-10 mx-auto">
+                        <h3 class="text-center mt-3 mb-4">Reset password</h3>
+                        <!-- <p class="text-muted text-3 text-center">Please enter the OTP (one time password) to verify your
+                            account. A Code has been sent to <span class="text-dark text-4">+1*******179</span></p> -->
+                        <form [formGroup]="resetPassword" (ngSubmit)="reset(resetPassword.value)">
+                            <div class="form-group">
+                                <input type="text" formControlName="otp" class="form-control border-2" name="otp"
+                                    required placeholder="otp">
+                                <span class="error"
+                                    *ngIf="resetPassword.controls.otp.invalid && resetPassword.controls.otp.touched">*6
+                                    digit OTP required.</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" formControlName="newPassword" class="form-control border-2"
+                                    name="newPassword" required placeholder="New Password">
+                                <span class="error"
+                                    *ngIf="resetPassword.controls.newPassword.invalid && resetPassword.controls.newPassword.touched">*Password
+                                    required,Minimum 8 character password required</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" formControlName="confirmPassword" class="form-control border-2"
+                                    name="confirmPassword" required placeholder="Confirm Password">
+                                <span class="error"
+                                    *ngIf="resetPassword.controls.confirmPassword.invalid && resetPassword.controls.confirmPassword.touched">*Password
+                                    and confirm password does not match.</span>
+                            </div>
+
+                            <h6 style="color: red;">{{ result5 }}</h6>
+
+                            <button class="btn btn-primary btn-block shadow-none my-4"
+                                [disabled]="resetPassword.invalid" id="otp-Btn" type="submit"><span class="button__text">Verify</span></button>
+                        </form>
+                        <!--  <p class="text-2 text-center">Not received your code? <a class="btn-link" href="#">Resend
+                                code</a></p>
+                        <p class="text-2 text-center mb-0"><a class="btn-link" href="#">Call me</a></p> -->
+                    </div>
+                </div>
+                <!-- OTP Form End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- OTP Modal End -->
+
+<!-- Otp Modal Start -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4>Welcome To Nestor India</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeOtpModal()">&times;</button>
+  </div>
+  <div class="modal-body login-modal">
+    <form [formGroup]="otpForm" (ngSubmit)="verify(otpForm.value)">
+      <div class="form-group">
+          <input type="text" formControlName="otp" class="form-control border-2" name="otp"
+              required placeholder="otp">
+          <span class="error"
+              *ngIf="otpForm.controls.otp.invalid && otpForm.controls.otp.touched">*6
+              digit OTP required.</span>
+      </div>
+      <div class="text-center">
+        <span>Didn't get? <a (click)="resendOtp()" style="cursor: pointer; text-decoration: underline;">Resend Otp!</a></span>
+      </div>
+      <h6 style="color: red;">{{ result5 }}</h6>
+
+      <button class="btn btn-primary btn-block shadow-none my-4"
+          [disabled]="otpForm.invalid" id="otp-Btn" type="submit"><span class="button__text">Verify</span></button>
+  </form>
+  </div>
+</ng-template>
+<!-- Otp Modal End -->

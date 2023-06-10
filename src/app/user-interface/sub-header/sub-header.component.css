@@ -1,0 +1,9 @@
+.secondary-nav.nav{
+    z-index: 0
+}
+.secondary-nav.nav .nav-link {
+
+    margin: 0;
+    padding: .6rem 0px;
+   
+}

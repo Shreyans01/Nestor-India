@@ -1,0 +1,34 @@
+.disabled {
+  cursor: not-allowed;
+}
+
+.enable {
+  cursor: pointer;
+}
+
+.form {
+  width: 100% !important;
+}
+
+.icon-inside {
+  right: 19.3px !important;
+  top: calc(50% - 16.3px) !important;
+  z-index: 1;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+}
+
+.autocomplete-container .input-container .x {
+  background: white;
+  z-index: 111111111 !important;
+}
+
+select {
+    word-wrap: normal;
+    width: 100%!important;
+}

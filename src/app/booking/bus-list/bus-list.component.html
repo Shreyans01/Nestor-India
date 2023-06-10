@@ -1,0 +1,440 @@
+<!-- Page Header
+    ============================================= -->
+<!-- <section class="page-header page-header-text-light bg-secondary">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1>Bus - List Page</h1>
+            </div>
+            <div class="col-md-4">
+                <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking-bus.html">Bus</a></li>
+                    <li class="active">Bus List Page</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section> -->
+<!-- Page Header end -->
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+<!-- Content
+  ============================================= -->
+<div id="content">
+    <section class="container">
+        <div class="row col-md-12">
+
+            <form class="form" [formGroup]="busBookingForm" (ngSubmit)="busBooking(busBookingForm.value)">
+                <div class="form-row">
+                    <div class="col-md-3 form-group">
+
+                        <div class="">
+                            <ng-autocomplete [data]="this.result2" [searchKeyword]="keyword" placeholder="From"
+                                formControlName="fromCity" name="fromCity" (selected)='selectEvent($event)'
+                                (inputChanged)='fromList($event)' (inputFocused)='onFocused($event)'
+                                [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [minQueryLength]="2"
+                                [debounceTime]="250">
+                            </ng-autocomplete>
+
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.name"></a>
+                            </ng-template>
+
+                            <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="">No matching location(s)</div>
+                            </ng-template><span class="icon-inside"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+
+                        <span class="error locationspacelow" *ngIf="submitted && getForm.fromCity.errors?.required">*Select From
+                            City required</span>
+                    </div>
+                    <div class="col-md-3 form-group">
+
+                        <div class="">
+                            <ng-autocomplete [data]="this.result2" [searchKeyword]="keyword" placeholder="To"
+                                formControlName="toCity" name="toCity" (selected)='selectEvent($event)'
+                                (inputChanged)='fromList($event)' (inputFocused)='onFocused($event)'
+                                [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [minQueryLength]="2"
+                                [debounceTime]="250">
+                            </ng-autocomplete>
+
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.name"></a>
+                            </ng-template>
+
+                            <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="">No matching location(s)</div>
+                            </ng-template><span class="icon-inside"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+                        <span class="error locationspacelow" *ngIf="submitted && getForm.toCity.errors?.required">*Select To City
+                            required</span>
+
+                    </div>
+                    <div class="col-md-3 form-group">
+
+                        <!-- <input id="busDepart" type="date" [min]="minDate" name="bookingDate"
+                            formControlName="bookingDate" value="{{this.dateValue}}" class="form-control" required
+                            placeholder="Depart Date">
+                        <span class="icon-inside"><i class="far fa-calendar-alt"></i></span>
+                        <span class="error locationspacelow" *ngIf="submitted && getForm.bookingDate.errors?.required">*Booking Date
+                            required</span> -->
+                            
+                                <div class="input-group datepicker-control">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" [minDate]="minDate" [value]="[dateValue]" name="bookingDate"
+                                        formControlName="bookingDate" [readonly]="true" ngbDatepicker #d="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                                                class="far fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                                <span class="error locationspacelow" *ngIf="submitted && getForm.bookingDate.errors?.required">Booking
+                                    Date required</span>
+                                <span class="error" *ngIf="submitted && getForm.bookingDate.errors?.pattern">Please select valid date</span>
+                            
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <button class="btn btn-primary btn-block searchBtn" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="row">
+
+            <!-- Side Panel
+        ============================================= -->
+            <aside class="col-md-3">
+                <div class="bg-white shadow-md rounded p-3">
+                    <h3 class="text-5">Filter</h3>
+                    <hr class="mx-n3">
+                    <div class="accordion accordion-alternate style-2 mt-n3" id="toggleAlternate">
+                        <!-- <div class="card">
+                            <div class="card-header" id="departure">
+                                <h5 class="mb-0"> <a href="#" class="collapse" data-toggle="collapse"
+                                        data-target="#toggleDeparture" aria-expanded="true"
+                                        aria-controls="togglePrice">Departure Time</a> </h5>
+                            </div>
+                            <div id="toggleDeparture" class="collapse show" aria-labelledby="departure">
+                                <div class="card-body">
+                                    <p><span class="slider-time-departure">00:00</span> - <span
+                                            class="slider-time-departure">23:59</span></p>
+                                    <div id="slider-range-departure"></div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <div class="card">
+                            <div class="card-header" id="price">
+                                <h5 class="mb-0"> <a href="#" class="collapse" data-toggle="collapse"
+                                        data-target="#togglePrice" aria-expanded="true"
+                                        aria-controls="togglePrice">Price</a> </h5>
+                            </div>
+                            <div id="togglePrice" class="collapse show" aria-labelledby="price">
+                                <div class="card-body">
+                                    <p>
+                                        <input id="amount" type="text" readonly
+                                            class="form-control border-0 bg-transparent p-0">
+                                    </p>
+                                    <div id="slider-range"></div>
+                                    <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+
+                                    <label class="form-label float-left">Min price: {{ minPrice }} </label>
+                                    <input type="range" class="form-range" #price (click)="minBusPrice(price.value)" [min]="minPrice" [max]="maxPrice" id="disabledRange" >
+                                    <label class="form-label float-left">Max price: {{ maxPrice }}</label>
+
+                                    <div data-role="page">
+                                        <div data-role="main" class="ui-content">
+                                            <div data-role="rangeslider">
+                                                <label for="price-min">Min Price:</label>
+                                                <mat-slider thumbLabel [displayWith]="formatLabel" step="100"
+                                                    (valueChange)="selectLabelActive('',$event)" min="100" max="1600"
+                                                    aria-label="units"></mat-slider>
+                                               
+                                                <label for="price-max">Max Price:</label>
+                                                <mat-slider thumbLabel [displayWith]="formatLabel" step="100"
+                                                    (valueChange)="selectLabelActive('',$event)" min="100" max="1600"
+                                                    aria-label="units"></mat-slider>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="card">
+                            <div class="card-header" id="busType">
+                                <h5 class="mb-0"> <a href="#" class="collapse" data-toggle="collapse"
+                                        data-target="#togglebusType" aria-expanded="true"
+                                        aria-controls="togglebusType">Bus Type</a> </h5>
+                            </div>
+                            <div id="togglebusType" class="collapse show" aria-labelledby="busType">
+                                <div class="card-body cardBottomLow" *ngFor="let bus of Bus_type">
+                                    <div class="custom-control custom-checkbox bustypemenu-item">
+                                        <input type="checkbox" id="bus?.Id" [value]="bus?.Id"
+                                            (change)="selectLabelActive($event,bus?.Id)" name="busType">
+                                        <label for="sleeper" style="margin-left: 10px;">{{bus?.Name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="busOperators">
+                                <h5 class="mb-0"> <a href="#" class="collapse" data-toggle="collapse"
+                                        data-target="#togglebusOperators" aria-expanded="true"
+                                        aria-controls="togglebusOperators">Bus Operators</a> </h5>
+                            </div>
+                            <div id="togglebusOperators" class="collapse show" aria-labelledby="busOperators">
+                                <div class="card-body">
+                                    <div class="custom-control bustypemenu-item custom-checkbox" *ngFor="let item of selectedArray">
+                                        <input type="checkbox" [value]="item.DisplayName" id="item.Id"
+                                            (click)="selectLabelActive($event,item?.Id)">
+                                        <label style="margin-left: 10px;">{{
+                                            item.DisplayName
+                                            }}</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- <div class="form-check mb-2 custom-control custom-checkbox" *ngFor="let item of busAvailable">
+                                <input type="checkbox" class="form-check-input custom-control-input" [value]="item.OperatorId"
+                                    [checked]="getActive(item.OperatorId)" (change)="OperatorsIds($event)" id="item.OperatorId">
+                                <label class="form-check-label custom-control-label brand-class" (click)="selectLabelActive(item?.OperatorId, item)">{{
+                                    item.DisplayName }}</label>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </aside><!-- Side Panel end -->
+
+            <div class="col-md-9 mt-4 mt-md-0">
+                <div class="bg-white shadow-md rounded py-4">
+                    <!-- <div class="bg-white shadow-md rounded py-4" *ngIf="busAvailable"> -->
+                    <div class="mx-3 mb-3 text-center">
+                        <h2 class="text-6 mb-4">{{fromValue}} <small class="mx-2">to</small>{{toValue}}</h2>
+                    </div>
+                    <div class="text-1 bg-light-3 border border-right-0 border-left-0 py-2 px-3">
+                        <div class="row">
+                            <div class="col col-sm-3"><span class="d-none d-sm-block">Operators</span></div>
+                            <div class="col col-sm-2 text-center">Departure</div>
+                            <div class="col-sm-2 text-center d-none d-sm-block">Duration</div>
+                            <div class="col col-sm-2 text-center">Arrival</div>
+                            <div class="col col-sm-3 text-center d-none d-sm-block">Price</div>
+                        </div>
+                    </div>
+                    <div class="bus-list">
+                        <div class="bus-item"
+                        >
+                            <div class="row align-items-sm-center flex-row py-4 px-3" *ngFor="let item of busAvailable">
+                                <div class="col col-sm-3"> <span class="text-3 text-dark operator-name">{{
+                                        item.DisplayName }}</span> <span class="text-1 text-muted d-block">{{
+                                        item.BusType }}</span> </div>
+                                <div class="col col-sm-2 text-center time-info"> <span class="text-4 text-dark">{{
+                                        item.DepartureTime }}</span>
+                                    <!-- <small
+                                        class="text-muted d-block">Mumbai</small> -->
+                                </div>
+                                <div class="col col-sm-2 text-center d-none d-sm-block time-info"> <span
+                                        class="text-3 duration">{{ item.Duration }}</span>
+                                    <!-- <small class="text-muted d-block">12
+                                        Stops</small> -->
+                                </div>
+                                <div class="col col-sm-2 text-center time-info"> <span class="text-4 text-dark">{{
+                                        item.ArrivalTime }}</span>
+                                    <!-- <small
+                                        class="text-muted d-block">Surat</small> -->
+                                </div>
+                                <div class="col-12 col-sm-3 align-self-center text-right text-sm-center mt-2 mt-sm-0">
+                                    <div class="d-inline-block d-sm-block text-dark text-4 price priceFont mb-sm-1">{{ rupee_sym
+                                        }} {{ item.Fares }}</div>
+                                    <!-- <a href="" class="btn btn-sm btn-outline-primary shadow-none" data-toggle="modal" data-target="#select-busseats"><i class="fas fa-ellipsis-h d-none d-sm-block d-lg-none" data-toggle="tooltip" title="Select Seats"></i> <span class="d-block d-sm-none d-lg-block">Select Seats</span></a> -->
+                                    <button type="submit" #Id (click)="availableSeatView(item)" [value]="item.Id"
+                                        class="btn btn-sm btn-outline-primary shadow-none buttontranNotdOne" data-toggle="modal"
+                                        data-target="#select-busseats">
+                                        <i class="fas fa-ellipsis-h d-none d-sm-none d-lg-none" data-toggle="tooltip"
+                                            title="Select Seats"></i> <span class="d-block d-lg-block ">Select
+                                            Seats</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                                <div class="busdatanot" *ngIf="busAvailable.length == 0 || !busAvailable">Data not found</div>
+                            
+                            <!-- <button type="submit" (click)="initiazeSeatLower()"
+                                class="btn btn-sm btn-outline-primary shadow-none" data-toggle="modal"
+                                data-target="#select-busseats">
+                                <i class="fas fa-ellipsis-h d-none d-sm-block d-lg-none" data-toggle="tooltip"
+                                    title="Select Seats"></i> <span class="d-block d-sm-none d-lg-block">Select
+                                    Seats</span>
+                            </button> -->
+                        </div>
+                        <ng-template #notBusAvailable>
+                            <div>Data not found</div>
+                        </ng-template>
+
+                    </div>
+
+                    <!-- Pagination
+              ============================================= -->
+                    <!-- <ul class="pagination justify-content-center mt-4 mb-0">
+                        <li class="page-item disabled"> <a class="page-link" href="#" tabindex="-1"><i
+                                    class="fas fa-angle-left"></i></a> </li>
+                        <li class="page-item active"> <a class="page-link" href="#">1 <span
+                                    class="sr-only">(current)</span></a> </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"> <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
+                        </li>
+                    </ul> -->
+                    <!-- Pagination end -->
+                </div>
+                <!-- <div class="bg-white shadow-md rounded py-4" *ngIf="flag == true">
+                    <span class="error">{{ result6 }}</span>
+                </div> -->
+
+            </div>
+        </div>
+    </section>
+</div><!-- Content end -->
+
+
+
+<div id="select-busseats" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bus Booking Details</h5>
+                <button type="button" class="close" data-dismiss="modal" #closeBtn aria-label="Close"> <span
+                        aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body">
+                <div class="bus-details">
+                    <div class="row align-items-sm-center flex-row mb-4">
+                        <div class="col col-sm-3"> <span
+                                class="text-4 text-dark operator-name">{{selectedBusValue?.DisplayName}}</span>
+                            <span class="text-muted d-block">{{selectedBusValue?.BusType}}</span>
+                        </div>
+                        <div class="col col-sm-3 text-center time-info">
+                            <span class="text-5 text-dark bustime">{{selectedBusValue?.DepartureTime}}</span>
+                            <small class="text-muted d-block">{{fromValue}}</small>
+                        </div>
+                        <div class="col col-sm-3 text-center d-none d-sm-block time-info"> <span
+                                class="text-3 duration">{{selectedBusValue?.Duration}}</span>
+                            <!-- <small class="text-muted d-block">12
+                                Stops</small>  -->
+                        </div>
+                        <div class="col col-sm-3 text-center time-info">
+                            <span class="text-5 text-dark bustime">{{selectedBusValue?.ArrivalTime}}</span>
+                            <small class="text-muted d-block">{{toValue}}</small>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" (click)="lowerSeat()" id="first-tab" data-toggle="tab" href="#first"
+                                role="tab" aria-controls="first" aria-selected="true">Lower Berth</a> </li>
+                        <li class="nav-item" [ngClass]="disabled ? 'disabled': 'enable'"> <a class="nav-link"
+                                (click)="lowerSeat()" id="second-tab" data-toggle="tab" [ngClass]="disabled ? 'disabled': 'enable'"
+                                href="#second" role="tab" aria-controls="second" aria-selected="false">Upper Berth</a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" id="third-tab" data-toggle="tab" href="#third"
+                                role="tab" aria-controls="third" (click)="cancellation()" aria-selected="false">Cancellation Fee</a> </li>
+                    </ul>
+                    <div class="tab-content my-3" id="myTabContent">
+                        <div class="tab-pane show active col-md-5 busbookinglayout-design" id="first" role="tabpanel"
+                            aria-labelledby="first-tab">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 text-center">
+                                    <p class="text-muted text-1">Click on Seat to select/ deselect</p>
+                                    <div id="seat-mapLower">
+                                        <div class="front-indicator">Front</div>
+                                    </div>
+                                    <div id="legendLower"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane col-md-5 busbookinglayout-design" id="second" role="tabpanel" aria-labelledby="second-tab">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 text-center">
+                                    <p class="text-muted text-1">Click on Seat to select/ deselect</p>
+                                    <div id="seat-mapUpper">
+                                        <div class="front-indicator">Upper</div>
+                                    </div>
+                                    <div id="legendUpper"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="selectSeat">
+                            <form [formGroup]="busSeartSelectedForm"
+                                (ngSubmit)="busSeartSelected(busSeartSelectedForm.value)">
+                                <div class="col-12 col-lg-12 mt-3 mt-lg-0">
+                                    <div class="booking-details">
+                                        <h2 class="text-5">Booking Details</h2>
+    
+    
+                                        <span>Pickup Point</span>
+    
+                                        <select name="boardingTime" formControlName="boardingTime" required>
+                                            <option value="">Select Pickup Point</option>
+                                            <option *ngFor="let item of selectBusAvailable.BoardingTimes"
+                                                [value]="item.PointId">{{ item.Location }}
+                                                {{ item.Time }}</option>
+                                        </select>
+                                        <span class="error"
+                                            *ngIf="submitted && getSeaForm.boardingTime.errors?.required">*Pickup
+                                            Point</span>
+                                        <br />
+                                        <span>Dropping Point</span>
+    
+                                        <select required name="DroppingTimes" formControlName="DroppingTimes">
+                                            <option value="">Select Dropping Point</option>
+                                            <option *ngFor="let item of selectBusAvailable.DroppingTimes"
+                                                value="{{ item.PointId }}">{{ item.Location }}
+                                                {{ item.Time }}</option>
+                                        </select>
+    
+                                        <span class="error"
+                                            *ngIf="submitted && getSeaForm.DroppingTimes.errors?.required">*Dropping
+                                            Point</span>
+    
+                                        <p>Selected Seats (<span id="counter">0</span>):</p>
+                                        <div class="Plans_table">
+                                            <ul id="selected-seats">
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="d-flex bg-light-4 px-3 py-2 mb-3 totalPrice">Total Fare: <span
+                                                class="text-dark text-5 font-weight-600 ml-2">₹<span
+                                                    id="total">0</span></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Continue</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Time</td>
+                                        <td>Message</td>
+                                        <td class="text-center">Refund Percentage</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of selectBusAvailable.CancelCharges">
+                                        <td>{{ item.Time }}</td>
+                                        <td>{{ item.Message }}</td>
+                                        <td class="text-center">{{ item.Value }} <span *ngIf="item.Type == 'Percentage' ">%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- to -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,305 @@
+<div class="page-wrapper e-commerceWrapper" class="productCheckout">
+
+    <!-- preloader start -->
+
+    <!--  <div id="ht-preloader">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+ -->
+    <!-- preloader end -->
+
+
+    <app-e-commerce-header></app-e-commerce-header>
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+
+    <!--header end-->
+
+
+    <!--hero section start-->
+    <!-- <section class="bg-light breadcrumb-main" style="height:100px;padding: 2rem;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="h2 mb-0">Product Checkout</h1>
+                </div>
+                <div class="col-md-6 mt-3 mt-md-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-md-end bg-transparent p-0 m-0">
+                            <li class="breadcrumb-item">
+                                <a class="text-dark" [routerLink]="['/home']"
+                                    routerLinkActive="router-link-active">
+                                    <i class="las la-home me-1"></i>Home </a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="text-dark" [routerLink]="['/productList']"
+                                    routerLinkActive="router-link-active"> Products </a></li>
+                            <li class="breadcrumb-item active text-primary" aria-current="page">Product Checkout</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!--hero section end-->
+    <!--body content start-->
+    <div class="page-content">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12">
+                        <div class="checkout-form box-shadow white-bg">
+                            <h2 class="mb-4 text-center">Billing Details</h2>
+
+                            <h6 style="color: red;">{{ result }}</h6>
+
+                            <form [formGroup]="checkOutForm" (ngSubmit)="checkOut(checkOutForm.value)"
+                                id="checkout_frm">
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="mb-1">Full Name</label><em style="color: red;">*</em>
+                                            <input type="text" formControlName="fullName" name="fullName"
+                                                class="form-control" placeholder="Full Name">
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.fullName.errors?.required">*Full
+                                                Name is required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.fullName.errors?.pattern">*Only alphabets
+                                                are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="mb-1">Mobile No</label><em style="color: red;">*</em>
+                                            <input type="text" formControlName="mobileNumber" [maxLength]=10
+                                                [minLength]=10 name="mobileNumber" class="form-control"
+                                                placeholder="Mobile No">
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.mobileNumber.errors?.required">*Mobile
+                                                no is required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.mobileNumber.errors?.pattern">*Only
+                                                10 digit are required</span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-1">Select Country</label>
+                                        <select name="people" id="people" class="form-control">
+                                            <option value="#">Select country</option>
+                                            <option value="#">Alaska</option>
+                                            <option value="#">China</option>
+                                            <option value="#">Japan</option>
+                                            <option value="#">Korea</option>
+                                            <option value="#">Philippines</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="mb-1">Address Line 1</label><em style="color: red;">*</em>
+                                            <input type="text" formControlName="addressLine1" name="addressLine1"
+                                                class="form-control" placeholder="Address Line 1">
+
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.addressLine1.errors?.required">*Address
+                                                Line 1 required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.addressLine1.errors?.pattern">*Only
+                                                alphabets are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="mb-1">Address Line 2</label><em style="color: red;">*</em>
+                                            <input type="text" formControlName="addressLine2" name="addressLine2"
+                                                class="form-control" placeholder="Address Line 2">
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.addressLine2.errors?.required">*Address
+                                                Line 2 required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.addressLine2.errors?.pattern">*Only
+                                                alphabets are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="mb-1">City</label><em style="color: red;">*</em>
+                                            <input type="text" class="form-control" formControlName="city" name="city"
+                                                placeholder="City">
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.city.errors?.required">*City
+                                                required</span>
+                                            <span class="error" *ngIf="submitted && errorCtr.city.errors?.pattern">*Only
+                                                alphabets are allow</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-md-0">
+                                            <label class="mb-1">State</label><em style="color: red;">*</em>
+                                            <!-- <input type="text" formControlName="stateId" name="stateId"
+                                                class="form-control" placeholder="State" required> -->
+                                            <select formControlName="stateId" name="stateId" class="custom-select"
+                                                required>
+                                                <option value="">Select State</option>
+                                                <option *ngFor="let item of states" [value]="item.stateId">{{
+                                                    item.stateName }} </option>
+                                            </select>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.stateId.errors?.required">*State
+                                                required</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-md-0">
+                                            <label class="mb-1">Pin Code</label><em style="color: red;">*</em>
+                                            <input type="text" formControlName="pincode" name="pincode"
+                                                class="form-control" placeholder="Pin Code">
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.pincode.errors?.required">*Pin Code is
+                                                required</span>
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.pincode.errors?.pattern">*Only
+                                                digit are required</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-md-0">
+                                            <label class="mb-1">Address Type</label><em style="color: red;">*</em>
+                                            <select formControlName="addressType" name="addressType"
+                                                class="custom-select" required>
+                                                <option value="">Select address type</option>
+                                                <option *ngFor="let address of address_type; let i = index"
+                                                    [value]="address" [selected]=" i == 0">{{ address }}</option>
+                                            </select>
+                                            <!-- <input type="text" formControlName="addressType" name="addressType" class="form-control" placeholder="Address Type"> -->
+                                            <span class="error"
+                                                *ngIf="submitted && errorCtr.addressType.errors?.required">*Address type
+                                                is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <label class="mb-1">Payment Mode</label><br>
+                                        <div class="form-group mb-md-0" class="payment_mode">
+                                            <!-- <input type="text" formControlName="paymentMode" name="paymentMode"
+                                                class="form-control" placeholder="Payment Mode"> -->
+                                            <!-- <select class="custom-select" (change)="setPayMethod($event)"> -->
+                                            <!-- <label class="radio_img">
+                                                    <input type="radio" name="layout" value="UPI" />
+                                                    <div class="image payment_img upi_cls"></div>
+                                                  </label> -->
+
+                                            <label class="radio_img">
+                                                <label class="label_payment">Cards / Netbanking</label>
+                                                <input type="radio" formControlName="layout" value="Gateway" />
+                                                <div class="image payment_img razorpay_cls"></div>
+                                            </label>
+                                            <label class="radio_img">
+                                                <label class="label_payment">Wallet</label>
+                                                <input type="radio" formControlName="layout" value="Wallet" />
+                                                <div class="image payment_img wallet_cls"></div>
+                                            </label>
+                                            <!-- <label class="radio_img">
+                                                    <input type="radio" formControlName="layout" value="" />
+                                                    <div class="image payment_img"></div>
+                                                  </label> -->
+                                            <label class="radio_img">
+                                                <label class="label_payment">Cash on Delivery</label>
+                                                <input type="radio" formControlName="layout" checked value="COD" />
+                                                <div class="image payment_img cod_cls"></div>
+                                            </label>
+                                            <!-- <option [value]="method" *ngFor="let method of payment_methods; let i = index;" [selected]="i == 0">{{  method  }}</option> -->
+                                            <!-- </select> -->
+                                            <span class="error"
+                                                *ngIf="checkOutForm.controls.paymentMode.invalid && checkOutForm.controls.paymentMode.touched">*Payment
+                                                Mode Required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-md-0">
+                                            <button id="place_order" class="btn btn-primary btn-block my-4"
+                                                type="submit">Place Order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 mt-5 mt-lg-0">
+                        <div class="shadow p-3 p-lg-5">
+                            <form [formGroup]="promocodeForm" (ngSubmit)="promocodes(promocodeForm.value)"
+                                id="checkout_frm">
+                                <div class="p-3 p-lg-5 shadow-sm mb-5 promocode">
+                                    <label class="text-black mb-3">Enter your promocode if you have one</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="c-code" placeholder="promo code"
+                                            aria-label="promo code" aria-describedby="button-addon2" #promocode
+                                            name="promocode" formControlName="promocode" type="text">
+                                        <button class="btn btn-primary btn-sm px-4" type="submit"
+                                            (click)="promo(promocode.value)" [disabled]="promocodeForm.invalid"
+                                            id="button-addon2">Apply</button>
+                                    </div>
+                                    <span class="error"
+                                        *ngIf="promocodeForm.controls.promocode.invalid && promocodeForm.controls.promocode.touched"></span>
+                                    <span class="success" *ngIf="result4; else error">
+                                        {{ result4 }} </span>
+                                    <ng-template #error>
+
+                                        <span class="error">
+                                            {{ result3 }} </span>
+                                    </ng-template>
+                                </div>
+                            </form>
+                            <div class="p-3 p-lg-5 shadow-sm mb-5 your-order-block">
+                                <h3 class="mb-3">Your Order</h3>
+                                <ul class="list-unstyled" *ngIf="result2 != 'null' ">
+                                    <li class="mb-5 border-bottom pb-5" *ngFor="let item of result2.Cart">
+                                        <span> {{ item.qty }} x {{ item.product }} = </span> {{ rupee_sym }} {{
+                                        item.total }}
+                                    </li>
+
+                                    <li class="mb-3 border-bottom pb-3">
+                                        <span> Shipping: </span> {{ rupee_sym }} {{ result2?.Pricing?.shippingCharge }}
+                                    </li>
+                                    <li class="mb-3 border-bottom pb-3">
+                                        <span> Subtotal: </span> {{ rupee_sym }} {{ result2?.Pricing?.subtotal }}
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong class="cart-total"> Total : </strong>
+                                        </span>
+                                        <strong class="cart-total">{{ rupee_sym }} {{ result2?.Pricing?.grandTotal }}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--body content end-->
+
+    <!--footer start-->
+
+    <app-e-commerce-footer></app-e-commerce-footer>
+
+    <!--footer end-->
+
+</div>
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+
+<!--back-to-top start-->
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<!--back-to-top end-->

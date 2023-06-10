@@ -1,0 +1,306 @@
+<!-- <app-header></app-header> -->
+<div id="content">
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+    <!-- Secondary Navigation
+    ============================================= -->
+    <app-sub-header></app-sub-header>
+    <!-- Secondary Navigation end -->
+
+    <section class="container">
+        <div class="bg-white shadow-md rounded p-4">
+            <div class="row">
+
+                <!-- Mobile Recharge
+          ============================================= -->
+                <div class="col-lg-4 mb-4 mb-lg-0 left-col-section">
+                    <h2 class="text-4 mb-3">Mobile Recharge or Bill Payment</h2>
+                    <form [formGroup]="rechargeBillMobile" (ngSubmit)="billMobile(rechargeBillMobile.value)">
+
+                        <div class="mb-3">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input id="prepaid" formControlName="rechargeBillpayment" #mobilePrePaid
+                                    (click)="MobileRecharge(mobilePrePaid.value)" name="rechargeBillpayment"
+                                    value="prepaid" class="custom-control-input" checked="" required type="radio">
+                                <label class="custom-control-label" for="prepaid">Prepaid</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input id="postpaid" formControlName="rechargeBillpayment" #mobilePostPaid
+                                    (click)="MobileRecharge(mobilePostPaid.value)" value="postpaid"
+                                    name="rechargeBillpayment" class="custom-control-input" required type="radio">
+                                <label class="custom-control-label" for="postpaid">Postpaid</label>
+                            </div>
+                            <span class="error"
+                                *ngIf="submitted && getForm.rechargeBillpayment.errors?.required">Prepaid/Postpaid
+                                required</span>
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select" #operatorId (change)="operaId(operatorId.value)"
+                                formControlName="operator" name="operator" required="">
+                                <option value="">Select Your Operator</option>
+                                <option *ngFor="let item of result2" value="{{ item.operatorId }}">{{ item.operatorName
+                                    }}</option>
+
+                            </select>
+                            <span class="error" *ngIf="submitted && getForm.operator.errors?.required">Operator
+                                required</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" #mobileNo (change)="Mobile(mobileNo.value)"
+                                formControlName="MobileNumber" [minlength]="10" [maxlength]="10" name="MobileNumber"
+                                placeholder="Mobile Number">
+                            <span class="error" *ngIf="submitted && getForm.MobileNumber.errors?.required">Required
+                                mobile number
+
+                            </span>
+                            <span class="error" *ngIf="submitted && getForm.MobileNumber.errors?.pattern">Only
+                                10 digit allowed <br>
+                            </span>
+                            <br>
+                        </div>
+
+                        <div class="form-group input-group amount-field" style="margin-bottom: 2px;">
+                            <div class="input-group-prepend"> <span class="input-group-text"><i
+                                        class="fas fa-rupee-sign"></i></span> </div>
+
+                            <button data-target="#viewPlans" *ngIf="login; else logout"
+                                [disabled]="rechargeBillMobile.controls.MobileNumber.invalid || rechargeBillMobile.controls.operator.invalid || rechargeBillMobile.controls.rechargeBillpayment.invalid"
+                                (click)="MobilePlans()" style="border: none; background: none;" data-toggle="modal"
+                                type="button" class="view-plans-link">View Plans
+                            </button>
+                            <ng-template #logout>
+                                <button data-target="#login-modal" style="border: none; background: none;" type="button"
+                                    data-toggle="modal" class="view-plans-link">View
+                                    Plans
+                                </button>
+                            </ng-template>
+                            <input class="form-control" name="amount" value="{{ plansAmount }}" formControlName="amount"
+                                placeholder="Amount" required type="text">
+                        </div>
+                        <span class="error"
+                            *ngIf="(submitted && getForm.amount.errors?.required) && !amountValid">Amount
+                            required</span>
+                        <span class="error" *ngIf="submitted && getForm.amount.errors?.pattern">Amount
+                            invalid</span>
+                        <button style="margin-top: 20px;" class="btn btn-primary btn-block"
+                            *ngIf="login; else logoutUser" type="submit">Continue</button>
+                        <ng-template #logoutUser>
+
+                            <button style="margin-top: 20px;" class="btn btn-primary btn-block"
+                                data-target="#login-modal" type="button" data-toggle="modal">Continue</button>
+                        </ng-template>
+                    </form>
+                </div>
+                <!-- Mobile Recharge end -->
+
+                <!-- Slideshow
+          ============================================= -->
+
+                <div class="col-lg-8">
+
+                    <ngb-carousel class="app-my-carousel">
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper">
+                                <img class="img-fluid" src="assets/nirmalshreeUserInterface/images/slider/banner-1.jpg"
+                                    alt="banner 1" />
+
+                            </div>
+                            <div class="carousel-caption">
+
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper">
+                                <img class="img-fluid" src="assets/nirmalshreeUserInterface/images/slider/banner-2.jpg"
+                                    alt="banner 2" />
+
+                            </div>
+                            <div class="carousel-caption">
+
+                            </div>
+                        </ng-template>
+
+                    </ngb-carousel>
+
+                </div>
+            </div>
+            <!-- Slideshow end -->
+        </div>
+    </section>
+
+    <!-- Tabs
+    ============================================= -->
+    <div class="section pt-4 pb-3">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" id="mobile-recharge-tab" data-toggle="tab"
+                        href="#mobile-recharge" role="tab" aria-controls="mobile-recharge" aria-selected="true">Mobile
+                        Recharge</a> </li>
+                <li class="nav-item"> <a class="nav-link" id="billpayment-tab" data-toggle="tab" href="#billpayment"
+                        role="tab" aria-controls="billpayment" aria-selected="false">Bill Payment</a> </li>
+                <li class="nav-item"> <a class="nav-link" id="why-Nirmalshree-tab" data-toggle="tab"
+                        href="#why-Nirmalshree" role="tab" aria-controls="why-Nirmalshree" aria-selected="false">Why
+                        Nestor India</a> </li>
+            </ul>
+            <div class="tab-content my-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="mobile-recharge" role="tabpanel"
+                    aria-labelledby="mobile-recharge-tab">
+                    <p>Instant Online mobile recharge Iisque persius interesset his et, in quot quidam persequeris vim,
+                        ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna
+                        imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani labores
+                        facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo. Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri
+                        alia ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in
+                        case prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an
+                        nam. <a href="#">Read Terms</a></p>
+                </div>
+                <div class="tab-pane fade" id="billpayment" role="tabpanel" aria-labelledby="billpayment-tab">
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo. Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri
+                        alia ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in
+                        case prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an
+                        nam.</p>
+                    <p>Instant Online mobile recharge Iisque persius interesset his et, in quot quidam persequeris vim,
+                        ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna
+                        imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani labores
+                        facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                </div>
+                <div class="tab-pane fade" id="why-Nirmalshree" role="tabpanel" aria-labelledby="why-Nirmalshree-tab">
+                    <p>Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri alia
+                        ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in case
+                        prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an nam.
+                    </p>
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo.</p>
+                    <p>Instant Online mobile recharge Iisque persius interesset his et, in quot quidam persequeris vim,
+                        ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna
+                        imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani labores
+                        facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tabs end -->
+
+    <!-- Refer & Earn
+    ============================================= -->
+    <div class="container">
+        <section class="section bg-white shadow-md rounded px-5">
+            <h2 class="text-9 font-weight-600 text-center">Refer & Earn</h2>
+            <p class="lead text-center mb-5">Refer your friends and earn up to $20.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-bullhorn"></i> </div>
+                        <h3>You Refer Friends</h3>
+                        <p class="text-3">Share your referral link with friends. They get $10.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-sign-in-alt"></i> </div>
+                        <h3>Your Friends Register</h3>
+                        <p class="text-3">Your friends Register with using your referral link.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-dollar-sign"></i> </div>
+                        <h3>Earn You</h3>
+                        <p class="text-3">You get $20. You can use these credits to take recharge.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-4"> <a href="#" class="btn btn-primary">Get Started Earn</a> </div>
+        </section>
+    </div>
+    <!-- Refer & Earn end -->
+
+    <!-- Mobile App
+    ============================================= -->
+    <app-mobile-app-link></app-mobile-app-link>
+    <!-- Mobile App end -->
+
+</div>
+<!-- Content end -->
+<!-- <app-footer></app-footer> -->
+<!-- <app-modal-dialog></app-modal-dialog> -->
+
+
+<div id="viewPlans" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Browse Plans</h5>
+                <button type="button" class="close" #closeBtn data-dismiss="modal" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">×</span> </button>
+            </div>
+            <div class="modal-body">
+
+                <div *ngIf="login">
+
+
+                    <div class="col-md-12" style="padding: 0px;">
+                        <div class="form-group">
+                            <select class="form-control" [(ngModel)]="plans" name="plans" #rechargeMobilePlans
+                                (change)="MobilePlans1(rechargeMobilePlans.value)" required="">
+                                <option value="" selected>Select plans type</option>
+                                <option *ngFor="let item of result3" value="{{ item }}">{{ item }}</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="search-hero">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                            autocomplete="off" placeholder="Search">
+                    </div>
+                    <div class="Plans_table">
+                        <table class="table table-striped table-bordered table-sm row-border hover">
+                            <thead>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Validity</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of c">
+                                    <!-- | filter:searchText -->
+                                    <td><i class="fas fa-rupee-sign"></i>{{ item.rs }}</td>
+                                    <td>{{ item.validity }}</td>
+                                    <td>{{ item.desc }}</td>
+                                    <td><button class="btn btn-sm btn-outline-primary shadow-none text-nowrap"
+                                            [value]="item.rs" #plansRs (click)="RechargePlan(plansRs.value)"
+                                            type="submit">Recharge</button></td>
+
+                                </tr>
+
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <h4>{{ result }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

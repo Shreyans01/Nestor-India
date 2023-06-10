@@ -1,0 +1,70 @@
+<!-- <div class="page-wrapper e-commerceWrapper" class="thankYou">
+
+   <div id="ht-preloader" *ngIf="isLoader && !orderMsg">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+    <app-e-commerce-header></app-e-commerce-header>
+    <div class="page-content">
+    
+        <section class="text-center pb-11 order-completed">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="mb-4" *ngIf="!orderMsg">Waiting for the response, Please Wait <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div></h5>
+                        <h5 class="mb-4">{{ orderMsg }}</h5>
+                        <a class="btn btn-primary btn-animated" [routerLink]="['/home']"
+                                routerLinkActive="router-link-active"><i class="las la-home me-1"></i>Home</a>
+                        <a class="btn btn-dark btn-animated ml-2" [routerLink]="['/productList']"
+                                routerLinkActive="router-link-active"><i
+                                class="las la-shopping-cart me-1"></i>Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    </div>
+    
+    <app-e-commerce-footer></app-e-commerce-footer>
+
+</div>
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div> -->
+
+
+
+<app-e-commerce-header></app-e-commerce-header>
+
+<div class="thank-you-section">
+    <div class="main-image-thank-you">
+        <img src="../../../assets/images/thankYou.png" />
+    </div>
+    <!-- <h3 class="thank-main-heading" *ngIf="orderMsg">Thank You for Your Order.</h3> -->
+    <h3 class="thank-main-heading" *ngIf="!orderMsg">Waiting for the response, Please Wait <div class="spinner-border"
+            role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </h3>
+
+    <p *ngIf="orderMsg">{{ orderMsg }}</p>
+    <div class="thank-main-subheading">
+
+        <p>Once your order has been shipped, We will notify you within five days.</p>
+    </div>
+    <h5 class="sub-heading-text">If you have any queries then feel free to get in contact us.</h5>
+    <div class="d-flex justify-content-center">
+        <button class="outline-btn me-3">
+            <img src="../../../assets/images/thankyouHome.jpeg" class="me-2" />
+            Home
+        </button>
+        <button class="fill-btn">
+            <i class="las la-shopping-cart fa-2x" style="size: 48px;"></i>
+            Continue Shopping
+        </button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255 255 255) !important;
+}
+.border-left{
+    padding-left: 40px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.pt-40{
+    padding-top: 40px;
+} 
+.pb-40 {
+    padding-bottom: 40px;
+}
+.footer{
+    padding: 50px 35px !important;
+}
+@media screen and (max-width: 767px) {
+    .footer {
+        padding: 20px 35px !important;
+    }
+    .mt-sm-3 {
+        margin-top: 15px;
+    }
+    .border-left{
+        padding-left: 0px !important;
+    border-left: 0px solid rgba(255, 255, 255, 0.3) !important;
+    }
+}
+.footer h5{
+    font-family: 'Outfit', sans-serif !important;
+    font-style: normal !important;
+font-weight: 600 !important;
+font-size: 18px !important;
+line-height: 23px !important;
+}
+.footer ul li a{
+    font-family: 'Outfit', sans-serif !important;
+    font-style: normal !important;
+font-weight: 500 !important;
+font-size: 16px !important;
+line-height: 20px !important;
+}

@@ -1,0 +1,51 @@
+.contact-heading {
+  color: #fff;
+  font-weight: 700;
+  font-size: 36px;
+  text-transform: uppercase;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.profile-name {
+  text-transform: uppercase;
+  color: #000000;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  font-family: 'Outfit';
+  padding: 5px 5px 5px 10px;
+  border-left: 2px solid #0C2F54;
+}
+
+.profile-contact {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #A6A6A6;
+  padding-left: 15px;
+}
+
+.profile-info {
+  padding-top: 55px;
+  padding-bottom: 55px;
+}
+.c-save-btn{
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 25px;
+width: 290px;
+height: 50px;
+background: #0C2F54 !important;
+border-color: #0C2F54 !important;
+color: #fff;
+border: none;
+outline: none;
+    box-shadow: none;
+    margin-bottom: 136px;
+}

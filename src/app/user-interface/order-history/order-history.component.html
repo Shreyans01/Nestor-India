@@ -1,0 +1,328 @@
+<app-header></app-header>
+
+<div id="ht-preloader" *ngIf="isLoading">
+    <div class="loader clear-loader">
+        <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+    </div>
+</div>
+
+<section class="page-header page-header-text-light bg-secondary">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1>My Profile</h1>
+            </div>
+            <div class="col-md-4">
+                <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">My Profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="content" class="myProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <app-profile-menu></app-profile-menu>
+            </div>
+
+            <!-- Personal Information
+          ============================================= -->
+            <!-- <h4 class="mb-4">Personal Information</h4>
+                    <hr class="mx-n4 mb-4"> -->
+
+            <div class="col-lg-9">
+                <div class="bg-white shadow-md rounded p-4">
+                    <!-- Orders History
+                          ============================================= -->
+                    <h4 class="mb-4">Orders History</h4>
+                    <hr class="mx-n4">
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <!-- <li class="nav-item"> <a class="nav-link active" id="second-tab" data-toggle="tab"
+                                href="#second" role="tab" aria-controls="second" aria-selected="false">Recharge & Bill
+                                Payment</a>
+                        </li> -->
+                        <li class="nav-item"> <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first"
+                                role="tab" aria-controls="first" aria-selected="false">Bus Booking</a> </li>
+                        <li class="nav-item"> <a class="nav-link" id="second-tab" data-toggle="tab" href="#second"
+                                role="tab" aria-controls="second" aria-selected="false">E-commerce</a> </li>
+                    </ul>
+                    <div class="tab-content my-3" id="myTabContent" style="padding:0px;">
+                        <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" id="first-sub-tab" data-toggle="tab"
+                                        href="#firstSub" role="tab" aria-controls="firstSub"
+                                        aria-selected="false">Upcoming</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" id="second-sub-tab" data-toggle="tab"
+                                        href="#secondSub" role="tab" aria-controls="secondSub"
+                                        aria-selected="false">Past</a> </li>
+                            </ul>
+                            <div class="tab-content my-3" style="padding: 10px;" id="myTabContent">
+                                <div class="tab-pane fade show active" id="firstSub" role="tabpanel"
+                                    aria-labelledby="first-sub-tab">
+                                    <div class="table-responsive-md">
+                                        <table class="table table-hover border">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Journey Date</th>
+                                                    <th>Description</th>
+                                                    <th>Ticket ID</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let upcoming of upComingBooking">
+                                                    <td class="align-middle">{{upcoming?.journeyDate}}</td>
+                                                    <td class="align-middle"><span class="text-1 d-inline-flex">Booking
+                                                            of {{upcoming?.source}} to
+                                                            {{upcoming?.destination}}
+                                                            Bus</span></td>
+                                                    <td class="align-middle">{{upcoming?.ticketId}}</td>
+                                                    <td class="align-middle">{{upcoming?.status}}</td>
+                                                    <td class="align-middle text-center"> <a
+                                                            (click)="GetTicketId(upcoming?.ticketId)"
+                                                            class="actionButtons" data-toggle="tooltip"
+                                                            title="Get Ticket"><i
+                                                                class="fas fa-ticket-alt text-4 text-success"></i></a>
+                                                        <a data-toggle="modal" *ngIf="upcoming?.status === 'Booked'"
+                                                            (click)="getModelUpcomingDetails(upcoming)"
+                                                            data-target="#upComingConfirmation" class="actionButtons"><i
+                                                                class="fas fa-times-circle" data-toggle="tooltip"
+                                                                title="Cancel Ticket"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="secondSub" role="tabpanel"
+                                    aria-labelledby="second-sub-tab">
+                                    <div class="table-responsive-md">
+                                        <table class="table table-hover border">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Journey Date</th>
+                                                    <th>Description</th>
+                                                    <th>Ticket ID</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let past of pastBooking">
+                                                    <td class="align-middle">{{past?.journeyDate}}</td>
+                                                    <td class="align-middle"><span class="text-1 d-inline-flex">Booking
+                                                            of {{past?.source}} to
+                                                            {{past?.destination}}
+                                                            Bus</span></td>
+                                                    <td class="align-middle">{{past?.ticketId}}</td>
+                                                    <td class="align-middle">{{past?.status}}</td>
+                                                    <td class="align-middle text-center"> <a
+                                                            (click)="GetTicketId(past?.ticketId)"
+                                                            class="actionButtons"><i
+                                                                class="fas fa-ticket-alt text-4 text-success"
+                                                                data-toggle="tooltip" title="Get Ticket"></i></a>
+                                                        <!-- <a data-toggle="modal" *ngIf="past?.status === 'Booked'"
+                                                            (click)="getModelPastDetails(past)"
+                                                            data-target="#pastConfirmation" class="actionButtons">
+                                                            <i class="fas fa-times-circle" data-toggle="tooltip"
+                                                                data-original-title="Your order is Failed"></i></a> -->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="second" role="tabpanel" aria-labelledby="second-tab">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" id="second-sub-tab" data-toggle="tab"
+                                        href="#secondSub" role="tab" aria-controls="secondSub"
+                                        aria-selected="false">Orders</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content my-3" style="padding: 0px;" id="myTabContent">
+                                <div class="tab-pane fade show active" id="secondsub" role="tabpanel"
+                                    aria-labelledby="second-sub-tab">
+                                    <div class="table-responsive-md">
+                                        <table class="table table-hover border">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Order Date</th>
+                                                    <th>Order Id</th>
+                                                    <th>Amount</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of result2">
+
+                                                    <td><label>{{ item.orderDate }}</label>
+
+                                                    </td>
+                                                    <td>
+                                                        <label>{{ item.orderId }}</label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center align-items-center">
+
+                                                            <label>{{ item.amount }}</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="product-price text-dark font-w-6">{{ item.status
+                                                            }}</span>
+                                                    </td>
+
+                                                    <td style="display: flex; justify-content: space-between;">
+                                                        <a style="display: flex;"
+                                                            [routerLink]="['/orderDetails']"
+                                                            title="View Order" [queryParams]="{orderId:item.orderId}"
+                                                            routerLinkActive="router-link-active"><i class="fa fa-eye"
+                                                                aria-hidden="true"></i>
+                                                        </a>
+
+                                                        <a data-toggle="modal" *ngIf="item.status == 'Pending'"
+                                                            (click)="orderIds1(item?.orderId)"
+                                                            class="fas fa-times-circle" style="cursor: pointer;"
+                                                            data-toggle="modal" data-target="#wishlistConfirmation"
+                                                            title="Cancel Order">
+                                                        </a>
+
+                                                        <a data-toggle="modal" style="cursor: pointer;"
+                                                            *ngIf="item.status != 'Pending' && item.status != 'Deleted' && item.status != 'PaymentAwaited'  "
+                                                            (click)="receiptOrderIds(item?.orderId)"
+                                                            title="Download Receipt" class="fas fa-receipt"
+                                                            title="Cancel Order">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr *ngIf="result2.length < 0 || !result2">We are eagerly waiting
+                                                    for your first
+                                                    order</tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Orders History end -->
+                </div>
+            </div>
+
+            <!-- Personal Information end -->
+
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal fade" id="upComingConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" *ngIf="!isCancelDetailsValid">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" #closeBtn data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to Cancel Bus Ticket ?
+            </div>
+            <form [formGroup]="upcomingForm" (ngSubmit)="upcomingConformTicket(upcomingForm.value)">
+                <div class="form-group">
+                    <label style="margin-left: 10px;">Email Id:</label>
+                    <input type="email" style="width: 95%; margin: 0 2%;" class="form-control" formControlName="email"
+                        required />
+                    <span class="error" *ngIf="isSubmittedUpcoming && getValidationupcoming?.email?.errors?.required">
+                        Email Id is
+                        required</span>
+                    <span class="error"
+                        *ngIf="isSubmittedUpcoming && getValidationupcoming?.email?.errors?.pattern">Please enter a
+                        valid
+                        email id</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" data-toggle="modal" data-target="#upcomingCancel"
+                        class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-content" *ngIf="isCancelDetailsValid">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" #closeBtn data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{cancelDetailsMessage}}
+            </div>
+            <div>
+                <table class="amountTable">
+                    <thead>
+                        <th class="amountText">Total Amount</th>
+                        <th class="amountText">Refund Amount</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="amountValue">
+                                {{CancelDetailsData?.totalAmount}}
+                            </td>
+
+                            <td class="amountValue">
+                                {{CancelDetailsData?.refundAmount}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel ticket ?
+            </div>
+            <div class="modal-footer">
+                <button (click)="upComingCancelTicket()" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="wishlistConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" #closeBtn1 data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to Cancel this order ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" #order (click)='orderIds(order.value)' [value]="orderIdValue"
+                    class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.actionButtons {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.error {
+  margin-left: 9px;
+  color: red;
+}
+
+.amountTable {
+  margin: 0 auto;
+}
+
+.amountText {
+  padding: 0px 50px;
+}
+
+.amountValue {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}

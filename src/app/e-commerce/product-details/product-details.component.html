@@ -1,0 +1,700 @@
+<div class="page-wrapper e-commerceWrapper" class="productDetails">
+
+    <app-e-commerce-header></app-e-commerce-header>
+
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+    <!--header end-->
+
+    <!--hero section start-->
+    <div class="breadcrumb-main bg-white breadcrumb-space" style="">
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb"
+                style="--bs-breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDkgMTciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjM3NSAxLjIwODM0TDcuNjI1IDguNTAwMDFMMS4zNzUgMTUuNzkxNyIgc3Ryb2tlPSIjQTZBNkE2IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);">
+                <ol class="breadcrumb bg-white ps-0 pe-0 mb-0 p-0">
+                    <li class="breadcrumb-item" aria-current="page" [routerLink]="['/home']"
+                        routerLinkActive="router-link-active"> Home</li>
+                    <li class="breadcrumb-item " aria-current="page" routerLinkActive="router-link-active"
+                        [routerLink]="['/productList']">Products</li>
+                    <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--hero section end-->
+
+    <!--body content start-->
+    <div class="page-content">
+        <!--product details start-->
+        <div class="lr-space">
+            <h4 class="no-product">{{ result1 }}</h4>
+            <form>
+                <input type="hidden" class="form-control" formControlName="productId" name="productId"
+                    data-bv-field="existingpassword" required="">
+                <div class="container-fluid">
+                    <div class="row" *ngFor="let item of result">
+                        <div class="col-md-1 col-sm-12 custom-col">
+                            <ol class="carousel-indicators list-inline d-flex flex-column res-row ml-0 mr-0">
+                                <li class="list-inline-item m-3" data-target="#carouselExampleIndicators"
+                                    data-slide-to="i" *ngFor="let img of item.images; let i = index;"
+                                    [ngClass]="(i==0) ? 'active' : ''">
+                                    <img [src]="img" class="d-block img">
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-12">
+                            <div id="carouselExampleIndicators"
+                                class="relative carousel slide product-detail-slider-wrapper" data-ride="carousel">
+                                <div class="carousel-inner img-magnifier-container">
+                                    <div class="carousel-item" *ngFor="let img of item.images; let i = index;"
+                                        [ngClass]="(i==0) ? 'active': ''">
+                                        <img [src]="img" class="d-block w-100" data-toggle="modal"
+                                            data-target="#myModal" (click)="onClick($event)">
+                                    </div>
+                                </div>
+                                <div _ngcontent-xyt-c50="" href="#carouselExampleIndicators"
+                                    class="carousel-arrow carousel-arrow-prev carousel-arrow-disabled"
+                                    data-slide="prev"></div>
+                                <div _ngcontent-yxr-c50="" href="#carouselExampleIndicators"
+                                    class="carousel-arrow carousel-arrow-next carousel-arrow-disabled"
+                                    data-slide="next"></div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 mt-5 mt-lg-0">
+                            <div class="product-details">
+                                <h3 class="mb-0 product-details-heading mb-3">
+                                    {{ item.product }}
+                                </h3>
+                                <div class="Product-price-label mb-3">{{ rupee_sym }} {{ item.price }}</div>
+                                <div>
+                                    <!-- <div class="tax-wrapper">Inclusive all taxes
+                                        <span class="ml-4">You Save: 1000rs (10%)</span>
+                                    </div> -->
+                                </div>
+                                <ul class="list-unstyled my-4">
+                                    <li class="mb-2"><span class="text-muted green-text"
+                                            *ngIf="item.stock > 0; else outOfStock">in
+                                            stock </span>
+                                        <ng-template #outOfStock> <span class="red-text">Out of stock </span>
+                                        </ng-template>
+                                    </li>
+                                    <!-- <li>
+                                        Brand :<span class="text-muted"> {{ item.brand }}</span>
+                                    </li> -->
+                                </ul>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="d-flex mb-2">
+                                        <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                                        <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                                        <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                                        <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                                        <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                                    </div>
+                                    <div class="text-muted">(13 Reviews)</div>
+                                </div>
+                                <div class="mb-4 mt-4 d-flex align-items-center">
+                                    <div class="black-dot mr-3"></div>
+                                    <div class="grey-dot mr-3"></div>
+                                    <div class="white-dot"></div>
+                                </div>
+                                <!-- <p class="mb-4 justify-content-start">{{ item.description }}</p>
+                                <p *ngIf="item.bestSeller != 'No' ">BestSeller </p>-->
+                                <div class="d-sm-flex align-items-center mb-5">
+                                    <div class="d-flex justify-content-center align-items-center product-qty">
+                                        <button class="btn-product btn-product-up" (click)="decrease(qty2)">
+                                            <img src="../../../assets/images/minus.svg"
+                                                style="height: 20px;filter: invert(1);" />
+                                        </button>
+                                        <label>{{ qty2 }}</label>
+                                        <button class="btn-product btn-product-down" (click)="increase(qty2)">
+                                            <img src="../../../assets/images/plus.svg"
+                                                style="height: 20px;filter: invert(1);" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-flex" *ngIf="login; else userLogout">
+                                    <button class="btn add-btn w-100" (click)="addCart()">Add To Cart</button>
+                                    <button class="btn add-fill-btn w-100 ml-3" #product
+                                        (click)='addToWishlist(product.value)' [value]="item.productId">Buy Now</button>
+                                </div>
+                                <ng-template #userLogout>
+                                    <!-- <a class="btn btn-primary me-sm-4 mb-3 mb-sm-0" (click)="addToCartWithoutLogin()">
+                                        Add To Cart
+                                    </a> -->
+                                    <div class="d-flex">
+                                        <button class="btn add-btn w-100" #product data-toggle="modal"
+                                            data-target="#login-modal" type="button" [value]="item.productId"
+                                            (click)="open(product.value)">Add To Cart</button>
+                                        <button class="btn add-fill-btn w-100 ml-3" #product data-toggle="modal"
+                                            data-target="#login-modal" type="button" [value]="item.productId"
+                                            (click)="open(product.value)">Buy
+                                            Now</button>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--product details end-->
+        <div class="company-option ">
+            <div class="container-fluid">
+                <div class="row justify-content-between lr-space">
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <img src="../../../assets/images/safe-shopping.svg" />
+                            <div class="">Safe Shopping</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <img src="../../../assets/images/free-shipping-outline.svg" />
+                            <div>Free Shipping</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <img src="../../../assets/images/Trusted_product.svg" />
+                            <div>Trusted Products</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <img src="../../../assets/images/inclusive_task.svg" />
+                            <div>Inclusive Taxes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-special-option">
+            <div class="container-fluid">
+                <div class="row c-b-space">
+                    <div class="col-md-6">
+                        <div class="text-left res-center">
+                            <img src="../../../assets/images/product-detail-special1.png" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="special-content res-center">
+                            <h3>Just take it and go</h3>
+                            <p>Noise One is light on weight with soft pads on the
+                                band and cups that ensure lasting comfort even after
+                                hours of use. While the design safeguards against
+                                distraction, the 90-degree rotatable cups make them
+                                travel friendly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row c-tb-space res-row-reverse">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="special-content res-center">
+                            <h3>Make your music last</h3>
+                            <p>It’s always music time with Noise One. Listen to your
+                                favorite tunes continuously for 16 hours; and when
+                                the headphones run out of juice, just plug in the
+                                auxiliary wire to start where you left off.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-right res-center">
+                            <img src="../../../assets/images/product-detail-special2.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="row c-t-space">
+                    <div class="col-md-6">
+                        <div class="text-left res-center">
+                            <img src="../../../assets/images/product-detail-special3.png" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="special-content res-center">
+                            <h3>Take Complete Control</h3>
+                            <p>Control your music, manage calls or change the
+                                volume without taking your phone out,
+                                just from Noise One.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- expansion panel start-->
+        <!-- expansion panel start-->
+        <div class="specification-wrapper">
+            <h2 class="text-center">Specifications</h2>
+            <div class="collapsible-tabs__wrapper accordion-wrapper">
+                <div class="collapsibles-wrapper">
+                    <button type="button" class="collapsible-trigger-btn accordian-header"
+                        (click)="accordianStatus($event)">
+                        Audio
+                        <span class="plus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/plus_blue.svg" />
+                            </div>
+                        </span>
+                        <span class="minus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/minus_blue.svg" />
+                            </div>
+                        </span>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-content__inner">
+                            <div class="card-body pt-0 pb-0">
+                                <ul>
+                                    <li class="accordion-content-list">
+                                        Speaker Driver
+                                    </li>
+                                </ul>
+                                <div class="sub-content-accordian pt-2">40 mm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsibles-wrapper">
+                    <button type="button" class="collapsible-trigger-btn accordian-header">
+                        Battery & Charging
+                        <span class="plus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/plus_blue.svg" />
+                            </div>
+                        </span>
+                        <span class="minus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/minus_blue.svg" />
+                            </div>
+                        </span>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-content__inner">
+                            <div class="card-body pt-0 pb-0">
+                                <ul>
+                                    <li class="accordion-content-list">
+                                        Play Time
+                                    </li>
+                                </ul>
+                                <div class="sub-content-accordian pt-2 pb-2">Up to 16hrs</div>
+                                <ul>
+                                    <li class="accordion-content-list">
+                                        Charging Time
+                                    </li>
+                                </ul>
+                                <div class="sub-content-accordian pt-2">Up to 2hrs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsibles-wrapper">
+                    <button type="button" class="collapsible-trigger-btn accordian-header">
+                        Connectivity
+                        <span class="plus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/plus_blue.svg" />
+                            </div>
+                        </span>
+                        <span class="minus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/minus_blue.svg" />
+                            </div>
+                        </span>
+                    </button>
+                    <div class="collapsible-content">
+                        <div class="collapsible-content__inner">
+                            <div class="card-body pt-0 pb-0">
+                                <ul>
+                                    <li class="accordion-content-list">
+                                        Wireless Range
+                                    </li>
+                                </ul>
+                                <div class="sub-content-accordian pt-2 pb-2">10m</div>
+                                <ul>
+                                    <li class="accordion-content-list">
+                                        Compatibility
+                                    </li>
+                                </ul>
+                                <div class="sub-content-accordian pt-2">Android & IOS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapsibles-wrapper">
+                    <button type="button" class="collapsible-trigger-btn accordian-header">
+                        Additional Features
+                        <span class="plus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/plus_blue.svg" />
+                            </div>
+                        </span>
+                        <span class="minus-icon">
+                            <div class="box-plus-minus">
+                                <img src="../../../assets/images/minus_blue.svg" />
+                            </div>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- expansion panel end-->
+        <!-- expansion panel start-->
+        <div class="warrenty-wrapper">
+            <div class="row res-row-reverse">
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div class="warrenty-content res-center ">
+                        <h3>1 Year Limited Warranty.</h3>
+                        <p>Our products go through multiple levels of quality
+                            check to ensure that you get the best. But in case, you
+                            have any issue with the product, we provide 1 year of
+                            manufacturer warranty and excellent customer service.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-right res-center">
+                        <img src="../../../assets/images/headphone_white-bg.png" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- expansion panel end-->
+
+        <div class="customer-review pb-0">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 res-mb-15">
+                    <div class="blue-card-wrapper text-center">
+                        <div class="blue-heading">One Headphones</div>
+                        <div class="blue-sub-heading mb-2">4.5</div>
+                        <div class="d-flex justify-content-center mb-3">
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                        </div>
+                        <div class="review-text">15 Reviews</div>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-white-wrapper w-100">Write A
+                                Review</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 res-mb-15">
+                    <div class="white-card-wrapper text-left">
+                        <div class="white-heading mb-1">Shreyans Shah</div>
+                        <div class="white-sub-heading ">Verified User</div>
+                        <div class="d-flex mb-2">
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                        </div>
+                        <div class="review-content-head mb-2">Good Quality</div>
+                        <div class="review-text-content">The NIRMAL Wireless Earpods are incredible! The
+                            noise-cancellation is top-notch.</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 res-mb-15">
+                    <div class="white-card-wrapper text-left">
+                        <div class="white-heading mb-1">Nirmal Wani</div>
+                        <div class="white-sub-heading ">Verified User</div>
+                        <div class="d-flex mb-2">
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                        </div>
+                        <div class="review-content-head mb-2">Good Quality</div>
+                        <div class="review-text-content">The NIRMAL Wireless Earpods are fantastic! The sound quality is
+                            exceptional.</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 res-mb-15">
+                    <div class="white-card-wrapper text-left">
+                        <div class="white-heading mb-1">Rahul Gupta</div>
+                        <div class="white-sub-heading ">Verified User</div>
+                        <div class="d-flex mb-2">
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                            <img src="../../../assets/images/Star_yellow.png" class="yellow-star" />
+                        </div>
+                        <div class="review-content-head mb-2">Good Quality</div>
+                        <div class="review-text-content">The NIRMAL Wireless Earpods noise-cancellation is impressive, and the sound quality is
+                            excellent. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--recent product start-->
+        <div class="header-section res-mb-15">
+            <div class="container-fluid" *ngIf="Rela">
+                <div class="carousel-wrapper">
+                    <h2>You may also like:</h2>
+                </div>
+                <div class="row d-flex related-products c-product-space">
+                    <div class="col product-detail-carousel">
+                        <carousel [loop]="true" [cellsToScroll]="1" [objectFit]="'cover'" [height]="350"
+                            [lightDOM]="true" class="carousel--slider-alignment h-540"
+                            [cellsToShow]="carousel_number !== null ? carousel_number : 3">
+                            <div class="carousel-cell" *ngFor="let item of result3">
+                                <div class="card product-list-card p-15 relative">
+                                    <!-- <button *ngIf="login; else notLogin" class="btn-wishlist btn-sm" type="button"
+                                        data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"
+                                        #product [value]="item.productId"><i
+                                            [ngClass]="{'fa-heart' : true, 'fas':WishlistArrayValue.includes(item.productId), 'far':!WishlistArrayValue.includes(item.productId)}"
+                                            (click)='doWishlist(product.value,WishlistArrayValue.includes(item.productId))'></i>
+                                    </button>
+                                    <ng-template #notLogin>
+                                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="Add to wishlist" data-toggle="modal"
+                                            data-target="#login-modal" *ngIf="login"><i class="lar la-heart"></i>
+                                        </button>
+                                    </ng-template> -->
+                                    <div class="card-image box-image-wrapper" (click)="processBar()">
+                                        <img src="{{ item.image }}" class="hover-zoom img-fluid w-100"
+                                            [routerLink]="['/productDetails']"
+                                            [queryParams]="{productId:item.productId}"
+                                            routerLinkActive="router-link-active" />
+                                    </div>
+                                    <div class="badge">Best Seller</div>
+                                    <div class="card-content pt-3">
+                                        <div class="d-flex justify-content-between">
+                                            <small class="small-text mb-1">{{item.category}}</small>
+                                            <div class="d-flex">
+                                                <img src="../../../assets/images/Star.png"
+                                                    style="height: 20px;width:20px" />
+                                                <div class="ml-1">4.5</div>
+                                            </div>
+                                        </div>
+                                        <h4 class="m-0 mb-1" [routerLink]="['/productDetails']"
+                                            [queryParams]="{productId:item.productId}"
+                                            routerLinkActive="router-link-active"
+                                            style="font: 400 15px/24px Outfit,sans-serif!important">{{item.product}}
+                                        </h4>
+                                        <small class="small-color-text mb-1">2 Colors</small>
+                                        <div class="price-text mb-3">{{ rupee_sym }} {{
+                                            item.price
+                                            }}
+                                            <!-- <del class="delete-text pl-2">₹2500</del> -->
+                                        </div>
+                                        <!-- <button type="button" class="btn btn-primary w-100">Add to Cart</button> -->
+                                        <button type="button" class="btn btn-primary w-100" #productId1
+                                            (click)="addCart2(productId1.value)" [value]="item.productId"> Add to Cart
+                                        </button>
+                                        <ng-template #userloggedOut>
+                                            <button type="button" class="btn btn-primary w-100" data-toggle="modal"
+                                                data-target="#login-modal" type="button" title="Add To Cart">Add to Cart
+                                            </button>
+                                        </ng-template>
+                                    </div>
+                                    <!-- <div class="card-info">
+                                        <div class="card-body">
+                                            <div class="product-title"><a class="link-title" (click)="processBar()"
+                                                    [routerLink]="['/productDetails']"
+                                                    [queryParams]="{productId:item.productId}"
+                                                    routerLinkActive="router-link-active">{{ item.product }}</a>
+                                            </div>
+                                            <div class="mt-1"> <span class="product-price h4"> {{ rupee_sym }} {{
+                                                    item.price }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <div class="product-link d-flex align-items-center justify-content-center">
+                                            <ng-template #userloggedOut>
+                                                <button class="btn-cart btn btn-primary btn-animated mx-3"
+                                                    data-toggle="modal" data-target="#login-modal" type="button"
+                                                    title="Add To Cart" *ngIf="login"><i
+                                                        class="las la-shopping-cart me-1"></i>
+                                                </button>
+                                            </ng-template>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </carousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--recent product end-->
+    </div>
+    <!--body content end-->
+
+    <!--footer start-->
+    <app-e-commerce-footer></app-e-commerce-footer>
+    <!--footer end-->
+</div>
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+
+<!--back-to-top start-->
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<!--back-to-top end-->
+
+<div class="modal fade view-modal quickview" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: calc(100vw - 30vw);">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" #closeBtn aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-5 col-12">
+                            <img id="" class="img-fluid w-100 mh-100"
+                                onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                src="{{ result6.mainImage }}" alt="" />
+                        </div>
+                        <div class="col-lg-7 col-12 mt-5 mt-lg-0">
+                            <div class="product-details">
+                                <h3 class="mb-0" style="font: 400 15px/24px Outfit,sans-serif!important">{{
+                                    result6.product }}</h3>
+                                <div>
+                                    <div></div>
+                                </div>
+                                <div class="product-price h4">price: {{ rupee_sym }} {{ result6.price
+                                    }}</div>
+                                <ul class="list-unstyled my-4">
+                                    <li class="mb-2">
+                                        <div class="green-text" *ngIf="result6.stock > 0; else outOfStock">In Stock
+                                        </div>
+                                        <ng-template #outOfStock> <span class="text-muted">Out of stock </span>
+                                        </ng-template>
+                                    </li>
+                                    <!-- <li>Categories :<span class="text-muted">{{ result6.category }}</span>
+                                          </li> -->
+                                    <li>
+                                        Brand :<span class="text-muted"> {{ result6.brand }}</span>
+                                    </li>
+                                </ul>
+                                <p class="mb-4 product-details">{{ result6.description }}</p>
+
+                                <div class="d-sm-flex align-items-center mb-5" *ngIf="login">
+                                    <!-- <div class="d-flex align-items-center me-sm-4">
+                                      <button class="btn-product btn-product-up"> <i class="las la-minus"></i>
+                                      </button>
+                                      <input class="form-product" type="number" #qtyValue1 name="qty" value=1
+                                          name="form-product">
+                                      <button class="btn-product btn-product-down"> <i class="las la-plus"></i>
+                                      </button>
+
+
+                                  </div> -->
+
+                                    <div class="d-flex justify-content-center align-items-center product-qty">
+                                        <button class="btn-product btn-product-up" (click)="decrease1(qty3)">
+                                            <i class="las la-minus"></i>
+                                        </button>
+                                        <label>{{ qty3 }}</label>
+                                        <button class="btn-product btn-product-down" (click)="increase1(qty3)">
+                                            <i class="las la-plus"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- <select class="form-select w-auto mt-3 mt-sm-0">
+                                                                          <option selected>Size</option>
+                                                                          <option value="1">XS</option>
+                                                                          <option value="2">S</option>
+                                                                          <option value="3">M</option>
+                                                                          <option value="4">L</option>
+                                                                          <option value="5">XL</option>
+                                                                          <option value="6">XXL</option>
+                                                                      </select>
+                                                                      <div class="d-flex text-center ms-sm-4 mt-3 mt-sm-0 widget-color">
+                                                                          <div class="form-check ps-0 me-3">
+                                                                              <input type="radio" class="form-check-input" id="color-filter1" name="Radios">
+                                                                              <label class="form-check-label" for="color-filter1"
+                                                                                  data-bg-color="#3cb371"></label>
+                                                                          </div>
+                                                                          <div class="form-check ps-0 me-3">
+                                                                              <input type="radio" class="form-check-input" id="color-filter2" name="Radios"
+                                                                                  checked>
+                                                                              <label class="form-check-label" for="color-filter2"
+                                                                                  data-bg-color="#4876ff"></label>
+                                                                          </div>
+                                                                          <div class="form-check ps-0 me-3">
+                                                                              <input type="radio" class="form-check-input" id="color-filter3" name="Radios">
+                                                                              <label class="form-check-label" for="color-filter3"
+                                                                                  data-bg-color="#0a1b2b"></label>
+                                                                          </div>
+                                                                          <div class="form-check ps-0">
+                                                                              <input type="radio" class="form-check-input" id="color-filter4" name="Radios">
+                                                                              <label class="form-check-label" for="color-filter4"
+                                                                                  data-bg-color="#f94f15"></label>
+                                                                          </div>
+                                                                      </div> -->
+                                </div>
+                                <div class="d-sm-flex align-items-center mt-5" *ngIf="login; else userLogout">
+                                    <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        title="Add To Cart" (click)="addCart1()" [disabled]="addtoCart1.invalid"><i
+                                            class="las la-shopping-cart me-1"></i>Add To
+                                        Cart</button>
+                                    <!-- <a class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0" [routerLink]="['/e-commerce/productCart']" routerLinkActive="router-link-active"><i
+                                                                              class="las la-shopping-cart me-1"></i>Add To Cart</a> -->
+                                    <!-- <a class="btn btn-animated btn-dark" [routerLink]="['/e-commerce/wishlist']"
+                                      routerLinkActive="router-link-active">
+                                      <i class="lar la-heart me-1"></i>Add To
+                                      Wishlist
+                                  </a> -->
+
+                                    <button class="btn btn-animated btn-dark" type="button" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Add To Wishlist" #product
+                                        (click)='productDeetailsAddToWishlist(product.value)'
+                                        [value]="result6.productId"><i class="lar la-heart"></i> Add to Wishlist
+                                    </button>
+                                </div>
+
+                                <ng-template #userLogout>
+                                    <!-- <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0" (click)="processBar()"><i
+                                                                              class="las la-shopping-cart me-1"></i>Add To Cart</button> -->
+                                    <a class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        (click)="addToCartWithoutLogin()"><i class="las la-shopping-cart me-1"
+                                            title="Add To Cart"></i>Add To
+                                        Cart</a>
+                                    <!-- <a class="btn btn-animated btn-dark" data-toggle="modal" data-target="#login-modal"
+                                        data-bs-dismiss="modal" title="Add To Wishlist">
+                                        <i class="lar la-heart me-1"></i>Add To Wishlist </a> -->
+                                </ng-template>
+
+                                <h6 style="color: green;">{{ result7 }}</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content-wrapper">
+            <div class="modal-header-wrapper">
+                <button type="button" #closebutton class="close-btn-modal" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="card lesson-border">
+                    <img src="{{imgSrc}}" class="card-img-top" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

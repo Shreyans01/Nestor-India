@@ -1,0 +1,332 @@
+<div class="page-wrapper e-commerceWrapper" class="productList">
+    <app-e-commerce-header></app-e-commerce-header>
+
+    <!--hero section start-->
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+
+    <!-- carousel start -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active box-image-wrapper">
+                <!-- <img src="{{bgImage}}" class="img-fluid w-100" alt="banner" /> -->
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="text-left">
+                        <h4>{{bgTitle}}</h4>
+                        <!-- <h6>Feel the bass in your bones</h6> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- carousel end -->
+    <div class="body-content-space">
+        <div class="breadcrumb-main bg-white pt-50 ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 mt-3 mt-md-0">
+                        <nav aria-label="breadcrumb"
+                            style="--bs-breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDkgMTciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjM3NSAxLjIwODM0TDcuNjI1IDguNTAwMDFMMS4zNzUgMTUuNzkxNyIgc3Ryb2tlPSIjQTZBNkE2IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);">
+                            <ol class="breadcrumb bg-white ps-0 pe-0 mb-0 p-0">
+                                <li class="breadcrumb-item" aria-current="page" [routerLink]="['/home']"
+                                    routerLinkActive="router-link-active"> Home</li>
+                                <li class="breadcrumb-item" aria-current="page">Categories</li>
+                                <li class="breadcrumb-item active" aria-current="page"
+                                    routerLinkActive="router-link-active">Products</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-50">
+            <div class="container-fluid">
+                <div class="row c-res-col-reverse">
+                    <div class="col-xl-9 col-md-8">
+                        <div class="d-flex justify-content-between align-items-center pb-50">
+                            <div class="header-text">Total 9 Products</div>
+                            <div class="sort-filter ms-2 d-flex align-items-center">
+                                <div class="dropdownArrow-icon">
+                                    <img src="../../../assets/images/dropdownArrow.svg" />
+                                </div>
+                                <select style="-webkit-appearance: none;" class="form-select c-select" #mySelect
+                                    (change)='sort(mySelect.value)'>
+                                    <option value="" selected>Sort By</option>
+                                    <option value="1" class="option-wrapper">
+                                        <img class="option-icon" src="../../../assets/images/SortByAlphabet.svg" />A-Z
+                                    </option>
+                                    <option value="2" class="option-wrapper">
+                                        <img class="option-icon" src="../../../assets/images/SortByTime.svg" />Newest
+                                    </option>
+                                    <option value="3" class="option-wrapper">
+                                        <img class="option-icon"
+                                            src="../../../assets/images/dropdownArrow.svg" />Popular
+                                    </option>
+                                    <option value="4" class="option-wrapper">
+                                        <img class="option-icon"
+                                            src="../../../assets/images/SortByAlphabet.svg" />Price: Low to High
+                                    </option>
+                                    <option value="5" class="option-wrapper">
+                                        <img class="option-icon"
+                                            src="../../../assets/images/SortByAlphabet.svg" />Price: High to Low
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mb-4"
+                                *ngFor="let item of result | paginate: { itemsPerPage: 12, currentPage: p }">
+                                <div class="card product-list-card p-15 ">
+                                    <div class="card-image box-image-wrapper">
+                                        <img onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                            src="{{ item.image }}" alt="..." [routerLink]="['/productDetails']"
+                                            [queryParams]="{productId:item.productId}"
+                                            routerLinkActive="router-link-active" class="hover-zoom img-fluid w-100" />
+                                    </div>
+                                    <div class="card-content pt-3">
+                                        <small class="small-text mb-1">{{item.category}}</small>
+                                        <h4 class="m-0 mb-1" style="font: 400 15px/24px Outfit,sans-serif!important">
+                                            {{item.product}}</h4>
+                                        <div class="price-text mb-3"><del class="text-muted"><label>Price:
+                                                </label></del> <i class="fa fa-inr" aria-hidden="true"></i> {{ rupee_sym
+                                            }} {{
+                                            item.price
+                                            }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pagination-main row" *ngIf="is_data">
+                                <!-- <nav aria-label="Page navigation example" class="my-list-pagination">
+                                <ul class="pagination">
+                                  <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                      <div aria-hidden="true" class="c-icon-size">&laquo;</div>
+                                      <span class="sr-only">Previous</span>
+                                    </a>
+                                  </li>
+                                  <li class="page-item"><a class="page-link" (click)="onPageChange($event)" >1</a></li>
+                                  <li class="page-item"><a class="page-link" (click)="onPageChange($event)" >2</a></li>
+                                  <li class="page-item"><a class="page-link" (click)="onPageChange($event)" >...</a></li>
+                                  <li class="page-item"><a class="page-link" (click)="onPageChange($event)" >9</a></li>
+                                  <li class="page-item"><a class="page-link" (click)="onPageChange($event)" >10</a></li>
+                                  <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                      <div aria-hidden="true" class="c-icon-size">&raquo;</div>
+                                      <span class="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav> -->
+                                <pagination-controls class="float-right" previousLabel="" nextLabel=""
+                                    (pageChange)="getPage($event)">
+                                </pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4">
+                        <div class="card product-list-card res-product-list-card {
+                        height: 100%;
+                    } p-15 mt-105 res-mb-30">
+                            <div class="card-heading d-flex align-items-center">
+                                <img src="../../../assets/images/filter.svg" class="mr-2" />
+                                <h5 class="m-0">FILTERS</h5>
+                            </div>
+                            <div class="res-filter-col">
+                                <div class="p-4 px-0 border-bottom">
+                                    <h4 class="card-section-heading mb-3">Color</h4>
+                                    <div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Black
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                White
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Grey
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Red
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 px-0 border-bottom">
+                                    <h4 class="card-section-heading mb-3">Price</h4>
+                                    <div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Rs.500 - Rs.999
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Rs.1000 - Rs.1999
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Rs.2000 - Rs.2999
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 px-0">
+                                    <h4 class="card-section-heading mb-3">Brand</h4>
+                                    <div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Nirmal
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                JBL
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                noice
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                boAt
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--body content end-->
+
+    <!--footer start-->
+    <app-e-commerce-footer></app-e-commerce-footer>
+    <!--footer end-->
+
+</div>
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+
+
+<!--back-to-top start-->
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<!--back-to-top end-->
+<div class="modal fade view-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" #closeBtn aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-5 col-12">
+                            <img class="img-fluid w-100 mh-100"
+                                onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                src="{{ result9.mainImage }}" alt="" />
+                        </div>
+                        <div class="col-lg-7 col-12 mt-5 mt-lg-0">
+                            <div class="product-details">
+                                <h3 class="mb-0">{{ result9.product }}</h3>
+                                <span class="product-price h4">price: {{ rupee_sym }} {{
+                                    result9.price }}</span>
+                                <ul class="list-unstyled my-4">
+                                    <li class="mb-2"><span class="text-muted"
+                                            *ngIf="result9.stock > 0; else outOfStock">in stock </span>
+                                        <ng-template #outOfStock> <span class="text-muted">Out of stock </span>
+                                        </ng-template>
+                                    </li>
+                                    <input type="hidden" value="{{ result9.stock }}" #stork>
+
+                                </ul>
+                                <p class="mb-4">{{ result9.description }}</p>
+                                <div class="d-sm-flex align-items-center mb-5">
+                                    <div class="d-flex  me-sm-2">
+                                        <div class="d-sm-flex align-items-center mb-5" *ngIf="login">
+                                            <div class="d-flex justify-content-center align-items-center product-qty">
+                                                <button class="btn-product btn-product-up" (click)="decrease1(qty3)">
+                                                    <i class="las la-minus"></i>
+                                                </button>
+                                                <label>{{ qty3 }}</label>
+                                                <button class="btn-product btn-product-down" (click)="increase1(qty3)">
+                                                    <i class="las la-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-sm-flex align-items-center mt-5" *ngIf="login; else userLogout">
+                                    <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        (click)="addCart1(stork.value)"><i class="las la-shopping-cart me-1"></i>Add
+                                        To
+                                        Cart</button>
+
+                                    <button class="btn btn-animated btn-dark" type="button" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Add to wishlist" #product
+                                        (click)='ProductListAddToWishlist(product.value)' [value]="result.productId"><i
+                                            class="lar la-heart"></i>Add To Wishlist
+                                    </button>
+                                </div>
+
+                                <ng-template #userLogout>
+                                    <!-- <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0" (click)="processBar()"><i
+                                                                                class="las la-shopping-cart me-1"></i>Add To Cart</button> -->
+                                    <a class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        (click)="addToCartWithoutLogin()"><i class="las la-shopping-cart me-1"></i>Add
+                                        To Cart</a>
+                                    <!-- <a class="btn btn-animated btn-dark" data-toggle="modal" data-target="#login-modal"
+                                        data-bs-dismiss="modal"> <i class="lar la-heart me-1"></i>Add To Wishlist </a> -->
+                                </ng-template>
+
+                                <h6 style="color: green;"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

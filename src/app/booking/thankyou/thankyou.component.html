@@ -1,0 +1,40 @@
+<div id="content">
+    <div class="container">
+        <div class="row my-5">
+
+
+            <div class="col-lg-12 text-center mt-5">
+                <p class="text-success text-16 line-height-07"><i class="fas fa-check-circle"></i></p>
+                <h2 class="text-8">{{ busBookSeatMsg?.message }}</h2>
+
+
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="bg-white shadow-sm rounded p-3 p-sm-4 mb-4">
+                    <div class="row">
+                        <div class="col-sm text-muted">Booking status</div>
+                        <div class="col-sm text-sm-right font-weight-600">{{ busBookSeatMsg?.data.BookingStatus }}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm text-muted">PNR number</div>
+                        <div class="col-sm text-sm-right font-weight-600">{{ busBookSeatMsg?.data.OperatorPNR }}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm text-muted">Ticket id</div>
+                        <div class="col-sm text-sm-right font-weight-600">{{ busBookSeatMsg?.data.TicketId }}</div>
+                    </div>
+                    <hr>
+                    
+
+                <div class="text-center Pdfbtn_anotherrecharge">
+                    
+                    <a class="btn btn-primary btn-animated" [routerLink]="['/booking/bus']" routerLinkActive="router-link-active"><i
+                            class="las la-home me-1"></i>Home</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,217 @@
+<div class="page-wrapper e-commerceWrapper" class="product-cart">
+
+    <app-e-commerce-header></app-e-commerce-header>
+
+    <!--header end-->
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+
+    <!--hero section start-->
+    <div class="page-header page-header-text-light bg-secondary">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h1 class="text-center contact-heading m-0">CHECKOUT</h1>
+                </div>
+                <div class="col-md-3">
+                    <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--body content start-->
+    <div class="page-content">
+        <section *ngIf="result2; else NoData">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="table-responsive">
+                            <table class="cart-table table text-center">
+                                <thead>
+                                    <tr class="border-bottom">
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col" *ngIf="login">Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col" *ngIf="login">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of result2.Cart">
+                                        <td>
+                                            <div class="d-lg-flex align-items-center text-start">
+                                                <div class="flex-shrink-0">
+                                                    <a [routerLink]="['/productDetails']"
+                                                        [queryParams]="{productId:item.productId}"
+                                                        routerLinkActive="router-link-active">
+                                                        <img class="img-fluid"
+                                                            onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                                            src="{{ item.mainImage }}"
+                                                            style="width: 50px; height: 50px;" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <div class="product-title mb-2">
+                                                        <a class="link-title" [routerLink]="['/productDetails']"
+                                                            [queryParams]="{productId:item.productId}"
+                                                            routerLinkActive="router-link-active">{{ item.product }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="product-price text-muted"> {{ rupee_sym }} {{ item.price
+                                                }}</span>
+                                        </td>
+                                        <td *ngIf="login">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <button class="btn-product btn-product-up"
+                                                    (click)="decrease(item.productId, -1, item?.qty)">
+                                                    <i class="las la-minus" style="font-family: 'Line Awesome Free' !important;"></i>
+                                                </button>
+                                                <label *ngIf="item.qty">{{ item.qty }}</label>
+                                                <label *ngIf="item.minQty && !login">{{ item.minQty }}</label>
+                                                <button class="btn-product btn-product-down"
+                                                    (click)="increase(item.productId, 1, item?.qty)">
+                                                    <i class="las la-plus" style="font-family: 'Line Awesome Free' !important;"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="product-price text-dark font-w-6" *ngIf="item.total">{{
+                                                rupee_sym }} {{ item.total
+                                                }}</span>
+                                            <span class="product-price text-dark font-w-6"
+                                                *ngIf="item.price && !login">{{ rupee_sym }} {{ item.price
+                                                }}</span>
+                                        </td>
+
+                                        <td *ngIf="login">
+                                            <button type="submit" #ProductId (click)="ProductValue(ProductId.value)"
+                                                [value]="item.productId" class="btn btn-primary btn-sm"
+                                                data-toggle="modal" data-target="#wishlistConfirmation"
+                                                title="Product Remove form Cart">
+                                                <i class="las la-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div class="d-md-flex align-items-end justify-content-between pt-5">
+                            <div>
+                                <label class="text-dark h4" for="coupon">Coupon</label>
+                                <p>Enter your coupon code if you have one.</p>
+                                <div class="row form-row">
+                                    <div class="col">
+                                        <input class="form-control" id="coupon" placeholder="Coupon Code" type="text">
+                                    </div>
+                                    <div class="col col-auto">
+                                        <button class="btn btn-dark btn-animated">Apply Coupon</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-animated mt-3 mt-md-0">Update Cart</button>
+                        </div> -->
+                    </div>
+                    <div class="col-lg-4 ps-lg-5 mt-8 mt-lg-0" *ngIf="result2">
+                        <div class="shadow rounded p-5">
+                            <h4 class="text-dark text-center mb-2">Cart Totals</h4>
+                            <div class="d-flex justify-content-between align-items-center border-bottom py-3"
+                                *ngIf="login">
+                                <span class="text-muted">Subtotal</span>
+                                <span class="text-dark">{{ rupee_sym }} {{ result2.Pricing.subtotal }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center border-bottom py-3"
+                                *ngIf="login">
+                                <span class="text-muted">Shipping charges</span>
+                                <span class="text-dark">{{ rupee_sym }} {{ result2.Pricing.shippingCharge }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center pt-3 mb-5" *ngIf="login">
+                                <span class="text-dark h5">Total</span>
+                                <span class="text-dark font-w-7 h5">{{ rupee_sym }} {{ result2.Pricing.grandTotal
+                                    }}</span>
+                            </div>
+                            <a class="btn btn-primary btn-animated btn-block" *ngIf="!login" data-toggle="modal"
+                                data-target="#login-modal">Proceed To Checkout</a>
+                            <a class="btn btn-primary btn-animated btn-block" *ngIf="login"
+                                (click)="onProductCheckOut()">Proceed To Checkout</a>
+                            <!-- [routerLink]="['/productCheckout']"
+                                routerLinkActive="router-link-active" -->
+                            <a class="btn btn-dark btn-animated mt-3" [routerLink]="['/productList']"
+                                routerLinkActive="router-link-active">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- </form> -->
+            </div>
+        </section>
+        <ng-template #NoData>
+            <section class="empty-cart no-product">
+                <div class="container">
+                    <div class="row h-100">
+                        <div class="col-12 text-center h-100 d-flex align-items-center">
+                            <div class="w-100"><img class="img-fluid d-inline mb-5"
+                                    src="assets/e-commerce/images/empty-cart.png" alt="">
+                                <h2>{{ result5 }}</h2>
+                                <div class="col-lg-6 col-md-10 mx-auto">
+                                    <h6>Before proceed to checkout you must add some products to your shoping cart. You
+                                        will find a
+                                        lots of interstring Products on our "Products" Page.</h6><br>
+                                    <a class="btn btn-primary btn-animated" [routerLink]="['/productList']"
+                                        routerLinkActive="router-link-active">Continue Shopping</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ng-template>
+    </div>
+    <!--body content end-->
+
+
+    <!--footer start-->
+
+    <app-e-commerce-footer></app-e-commerce-footer>
+
+    <!--footer end-->
+
+</div>
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+
+<!--back-to-top start-->
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<!--back-to-top end-->
+
+<!-- Modal -->
+<div class="modal fade" id="wishlistConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" #closeBtn data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this product from cart ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" #product (click)='productIds(product.value)' [value]="productId"
+                    class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

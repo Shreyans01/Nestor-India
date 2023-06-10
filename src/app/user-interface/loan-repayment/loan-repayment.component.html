@@ -1,0 +1,346 @@
+<!-- <app-header></app-header> -->
+
+<!-- Content
+  ============================================= -->
+<div id="content">
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+
+    <!-- Secondary Navigation
+    ============================================= -->
+
+    <app-sub-header></app-sub-header>
+
+    <!-- Secondary Navigation end -->
+
+    <section class="container">
+        <div class="bg-white shadow-md rounded p-4">
+            <div class="row">
+
+                <!-- Water Bill
+          ============================================= -->
+                <div class="col-lg-4 mb-4 mb-lg-0 left-col-section" *ngIf="Bill; else noBill">
+                    <h2 class="text-4 mb-3">Pay Your Loan Repayment</h2>
+                    <form [formGroup]="loanRepaymentForm" (ngSubmit)="loanRepayment(loanRepaymentForm.value)">
+                        <div class="form-group">
+                            <select class="custom-select" formControlName="operator" #operator
+                                (change)="operatorsId(operator.value)" name="operator" required="">
+                                <option value="">Select Your Operator</option>
+                                <option *ngFor="let item of result2" value="{{ item.operatorId }}">{{ item.operatorName
+                                    }}</option>
+                            </select>
+                            <span class="error" *ngIf="submitted && getForm.operator.errors?.required">Operator
+                                required</span>
+                        </div>
+                        <div class="form-group">
+                            <span>Customer mobile number</span>
+                            <input class="form-control" type="text" placeholder="Enter customer mobile number"
+                                formControlName="MobileNumber" name="MobileNumber" [required]="true" minLength="10"
+                                maxlength="10" />
+                            <span class="error" *ngIf="submitted && getForm.MobileNumber.errors?.required">Please enter
+                                mobile nnumber
+
+                            </span>
+                            <span class="error" *ngIf="submitted && getForm.MobileNumber.errors?.pattern">Please enter
+                                valid mobile number<br>
+                            </span>
+                            <br>
+                            <div>
+                                <span *ngFor="let tmp of inputarr">
+                                    <span>{{ tmp.Name }}</span>
+                                    <input class="form-control" type="text" [placeholder]="tmp.Name"
+                                        [formControlName]="tmp.Name" [name]="tmp.Name" [required]="true" />
+                                    <span class="error" *ngIf="submitted && getForm[tmp.Name]?.errors">
+                                        <span *ngIf="submitted && getForm[tmp.Name]?.errors?.required"> Enter valid {{
+                                            tmp.Name }}</span>
+
+                                        <span *ngIf="submitted && getForm[tmp.Name]?.errors?.minlength">
+                                            Min Length Invalid
+                                        </span>
+
+                                        <span *ngIf="submitted && getForm[tmp.Name]?.errors?.maxlength">
+                                            Max Length Invalid
+                                        </span>
+
+                                        <span *ngIf="submitted && getForm[tmp.Name]?.errors?.pattern">
+                                            {{ tmp.Name }} Invalid
+                                        </span>
+
+
+                                    </span>
+                                    <br>
+                                </span>
+                            </div>
+
+
+                        </div>
+                        <div *ngIf="show == true; else FetchBill">
+                            <div class="form-group input-group amount-field">
+                                <div class="input-group-prepend"> <span class="input-group-text"><i
+                                            class="fas fa-rupee-sign"></i></span> </div>
+                                <input class="form-control" name="amount" formControlName="amount" placeholder="Amount"
+                                    required type="text">
+
+                                <span class="error" *ngIf="submitted && getForm.amount.errors?.required">Required amount
+                                </span>
+                            </div>
+                            <span class="error" *ngIf="ValidtaionMsg">
+                                {{ result }}
+                            </span>
+                            <button class="btn btn-primary btn-block" *ngIf="login; else logoutUser"
+                                type="submit">Continue</button>
+                            <ng-template #logoutUser>
+
+                                <button class="btn btn-primary btn-block" data-target="#login-modal" type="button"
+                                    data-toggle="modal">Continue</button>
+                            </ng-template>
+                        </div>
+                        <ng-template #FetchBill>
+                            <span class="error" *ngIf="ValidtaionMsg">
+                                {{ result }}
+                            </span>
+                            <button class="btn btn-primary btn-block" *ngIf="login; else logoutUser1"
+                                type="submit">Fetch Bill</button>
+                            <ng-template #logoutUser1>
+
+                                <button class="btn btn-primary btn-block" data-target="#login-modal" type="button"
+                                    data-toggle="modal">Fetch
+                                    Bill</button>
+                            </ng-template>
+                        </ng-template>
+
+
+                    </form>
+                </div><!-- Water Bill end -->
+
+                <!-- Slideshow
+          ============================================= -->
+
+
+                <div class="col-lg-8" *ngIf="Bill">
+
+
+                    <ngb-carousel class="app-my-carousel">
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper">
+                                <img class="img-fluid" src="assets/nirmalshreeUserInterface/images/slider/banner-6.jpg"
+                                    alt="banner 5" />
+
+                            </div>
+                            <div class="carousel-caption">
+
+                            </div>
+                        </ng-template>
+
+
+                    </ngb-carousel>
+                </div>
+                <!-- Slideshow end -->
+
+            </div>
+            <ng-template #noBill>
+                <div class="col-lg-12 mb-12 mb-lg-0">
+                    <div class="row ">
+                        <div class="col-md-12 d-flex">
+                            <div class="col-md-10">
+
+                                <h6>BHARAT BILLPAY PAYMENT SYSTEM</h6>
+                            </div>
+                            <div class="col-md-2 float-right">
+
+                                <img src="assets/nirmalshreeUserInterface/images/bharatpaylogo.jpg" width="70px"
+                                    height="70px">
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex">
+                            <div class="col-md-6 float-right">
+
+                                <label><b>Customer Number</b></label>
+                                <p> <label></label></p>
+
+                            </div>
+                            <div class="col-md-6 float-right">
+
+                                <label><b>Customer Name</b></label>
+                                <p> <label>{{ result3.customerName }}</label> </p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 d-flex">
+                            <div class="col-md-6">
+
+                                <label><b>Bill Date</b></label>
+                                <p><label>{{ result3.billDate }}</label></p>
+                            </div>
+                            <div class="col-md-6 float-right">
+
+                                <label><b>Due Date</b></label>
+                                <p> <label>{{ result3.dueDate }}</label></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex">
+                            <div class="col-md-6">
+
+                                <label><b>Bill Number</b></label>
+                                <p><label>{{ result3.billNumber }}</label></p>
+                            </div>
+
+                            <div class="col-md-6 float-right">
+
+                                <label><b>Convenience Free</b></label>
+                                <p><label></label></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex">
+                            <div class="col-md-6">
+
+                                <label><b>Bill Period</b></label>
+                                <p> <label>{{ result3.billPeriod }}</label></p>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label><b>Biller Name</b></label>
+                                <p><label></label></p>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-12 d-flex">
+                                                                                            <div class="col-md-6">
+                                                                                        
+                                                                                                <label><b>Payment Mode</b></label>
+                                                                                                <label></label>
+                                                                                            </div>
+                                                                                            <div class="col-md-6 float-right">
+                                                                                            </div>
+                                                                                        </div> -->
+                        <div>
+                            <br>
+
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend"> <span class="input-group-text"><i
+                                            class="fas fa-rupee-sign"></i></span> </div>
+                                <input class="form-control" #amount name="amount" [attr.disabled]="isBillAmount"
+                                    formControlName="amount" placeholder="Amount" [value]="result3.billAmount" required
+                                    type="text">
+                            </div>
+
+                            <button class="btn btn-primary btn-block" (click)="billPayment(amount.value)"
+                                type="submit">Continue</button>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template>
+        </div>
+    </section>
+
+    <!-- Tabs
+    ============================================= -->
+    <div class="section pt-4 pb-3">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" id="mobile-recharge-tab" data-toggle="tab"
+                        href="#mobile-recharge" role="tab" aria-controls="mobile-recharge" aria-selected="true">Water
+                        Bill Payment</a> </li>
+                <li class="nav-item"> <a class="nav-link" id="billpayment-tab" data-toggle="tab" href="#billpayment"
+                        role="tab" aria-controls="billpayment" aria-selected="false">Best Offers</a> </li>
+                <li class="nav-item"> <a class="nav-link" id="why-quickai-tab" data-toggle="tab" href="#why-quickai"
+                        role="tab" aria-controls="why-quickai" aria-selected="false">Pay Online</a> </li>
+            </ul>
+            <div class="tab-content my-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="mobile-recharge" role="tabpanel"
+                    aria-labelledby="mobile-recharge-tab">
+                    <p>Instant Online Water Bill Payment Iisque persius interesset his et, in quot quidam persequeris
+                        vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec
+                        magna imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani
+                        labores facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo. Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri
+                        alia ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in
+                        case prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an
+                        nam.</p>
+                </div>
+                <div class="tab-pane fade" id="billpayment" role="tabpanel" aria-labelledby="billpayment-tab">
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo. Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri
+                        alia ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in
+                        case prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an
+                        nam.</p>
+                    <p>Instant Online mobile recharge Iisque persius interesset his et, in quot quidam persequeris vim,
+                        ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna
+                        imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani labores
+                        facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                </div>
+                <div class="tab-pane fade" id="why-quickai" role="tabpanel" aria-labelledby="why-quickai-tab">
+                    <p>Cu pro facer sententiae, ne brute graece scripta duo. No placerat quaerendum nec, pri alia
+                        ceteros adipiscing ut. Quo in nobis nostrum intellegebat. Ius hinc decore erroribus eu, in case
+                        prima exerci pri. Id eum prima adipisci. Ius cu minim theophrastus, legendos pertinacia an nam.
+                    </p>
+                    <p>Partiendo voluptatibus ex cum, sed erat fuisset ne, cum ex meis volumus mentitum. Alienum
+                        pertinacia maiestatis ne eum, verear persequeris et vim. Mea cu dicit voluptua efficiantur,
+                        nullam labitur veritus sit cu. Eum denique omittantur te, in justo epicurei his, eu mei aeque
+                        populo.</p>
+                    <p>Instant Online mobile recharge Iisque persius interesset his et, in quot quidam persequeris vim,
+                        ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna
+                        imperdiet. Mediocrem qualisque in has. Enim utroque perfecto id mei, ad eam tritani labores
+                        facilisis, ullum sensibus no cum. Eius eleifend in quo. At mei alia iriure propriae.</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- Tabs end -->
+
+    <!-- Refer & Earn
+    ============================================= -->
+    <div class="container">
+        <section class="section bg-white shadow-md rounded px-5">
+            <h2 class="text-9 font-weight-600 text-center">Refer & Earn</h2>
+            <p class="lead text-center mb-5">Refer your friends and earn up to $20.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-bullhorn"></i> </div>
+                        <h3>You Refer Friends</h3>
+                        <p class="text-3">Share your referral link with friends. They get $10.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-sign-in-alt"></i> </div>
+                        <h3>Your Friends Register</h3>
+                        <p class="text-3">Your friends Register with using your referral link.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-box style-4">
+                        <div class="featured-box-icon bg-light-4 text-primary rounded-circle"> <i
+                                class="fas fa-dollar-sign"></i> </div>
+                        <h3>Earn You</h3>
+                        <p class="text-3">You get $20. You can use these credits to take recharge.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-4"> <a href="#" class="btn btn-primary">Get Started Earn</a> </div>
+        </section>
+    </div><!-- Refer & Earn end -->
+
+    <!-- Mobile App
+    ============================================= -->
+    <app-mobile-app-link></app-mobile-app-link><!-- Mobile App end -->
+
+</div><!-- Content end -->
+
+<!-- <app-footer></app-footer> -->
+<!-- <app-modal-dialog></app-modal-dialog> -->

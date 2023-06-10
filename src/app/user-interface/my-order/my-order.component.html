@@ -1,0 +1,92 @@
+<app-e-commerce-header></app-e-commerce-header>
+<div id="content" class="contactUs">
+  <div class="page-header page-header-text-light bg-secondary">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+          <h1 class="text-center contact-heading m-0">My Orders</h1>
+        </div>
+        <div class="col-md-3">
+          <img src="../../../assets/images/dot-Frame.png" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="content" class="myProfile" style="height: 700px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="profile-info">
+          <div class="profile-name">Kristin Watson</div>
+          <div class="profile-contact">+91 98547 54201</div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <app-profile-menu></app-profile-menu>
+      </div>
+      <div class="col-lg-8 ">
+        <div class="row mb-3">
+          <div class="col-lg-6">
+            <div class="in-process"><div class="active-inprocess">In Process</div></div>
+          </div>
+          <div class="col-lg-6">
+            <div class="completed"><div class="">Completed</div></div>
+          </div>
+        </div>
+        <div class="row favourite-wrapper" *ngFor="let item of result2">
+            <div class="col-lg-3">
+                <a class="link-title" [routerLink]="['/productDetails']" [queryParams]="{productId:item.productId}"
+            routerLinkActive="router-link-active"><img src="{{ item.image }}"
+              onerror="this.src='assets/e-commerce/images/No_image_available.png'" class="img-fluid" />
+              </a>
+            </div>
+            <div class="col-lg-9">
+                <div class="">
+                    <div class="favourite-list-content mb-4">
+                        <div>
+                            <div class="brand">noise</div>
+                            <div class="product-name">Headphone</div>
+                            <div class="description">2 Colors</div>
+                            <div class="price">₹1500</div>
+                        </div>
+                        <div class="rating">
+                            <div class="d-flex align-items-center">
+                                <img src="../../../assets/images/Star.png" class="mr-2" />
+                                3.3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row favourite-wrapper">
+            <div class="col-lg-3">
+                <img src="../../../assets/images/headphone.png" class="img-fluid" />
+            </div>
+            <div class="col-lg-9">
+                <div class="">
+                    <div class="favourite-list-content mb-4">
+                        <div>
+                            <div class="brand">noise</div>
+                            <div class="product-name">Headphone</div>
+                            <div class="description">2 Colors</div>
+                            <div class="price">₹1500</div>
+                        </div>
+                        <div class="rating">
+                            <div class="d-flex align-items-center">
+                                <img src="../../../assets/images/Star.png" class="mr-2" />
+                                3.3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    </div>
+  </div>
+</div>

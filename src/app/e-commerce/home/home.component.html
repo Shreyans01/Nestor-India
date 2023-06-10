@@ -1,0 +1,655 @@
+<div class="page-wrapper e-commerceWrapper" class="home">
+
+    <!-- preloader start -->
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+    <!-- preloader end -->
+    <!--header start-->
+    <app-e-commerce-header></app-e-commerce-header>
+    <!--header end-->
+    <!--hero section start-->
+    <div id="ht-preloader" *ngIf="isLoading">
+        <div class="loader clear-loader">
+            <img class="img-fluid" src="assets/e-commerce/images/loader.gif" alt="">
+        </div>
+    </div>
+    <!-- carousel start -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active box-image-wrapper animated3">
+                <img src="assets/e-commerce/images/home_page_image.jpg" class="img-fluid w-100" alt="banner" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Only This Week</h5>
+                    <p style="color: black !important;">25% OFF On Product</p>
+                    <button type="button" class="btn btn-light buy-btn">Shop Now<img class="ms-2"
+                            src="../../../assets/images/Arrow-Right-Up.svg" /></button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item box-image-wrapper">
+            <img src="assets/e-commerce/images/electronic/bg/02.jpg" class="img-fluid w-100" alt="banner" />
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Only This Week</h5>
+                <p style="color: black !important;">25% OFF On Product</p>
+                <button type="button" class="btn btn-light buy-btn">Shop Now<img class="ms-2"
+                        src="../../../assets/images/Arrow-Right-Up.svg" /></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content">
+    <section *ngIf="has_new_arrivals" class="header-section">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12">
+                    <div class="mb-5">
+                        <h2 class="mb-0 section-heading">New Arrivals</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex related-products c-product-space">
+                <div class="col">
+                    <carousel [loop]="true" [cellsToScroll]="1" [objectFit]="'cover'" [lightDOM]="true"
+                        class="carousel--slider-alignment h-440"
+                        [cellsToShow]="carousel_number !== null ? carousel_number : 3" [arrows]="true"
+                        [arrowsOutside]="true">
+                        <div class="carousel-cell" *ngFor="let item of result3">
+                            <div class="card product-list-card p-15 relative">
+                                <div class="card-image box-image-wrapper">
+                                    <img src="{{ item.image }}" [routerLink]="['/productDetails']"
+                                        [queryParams]="{productId:item.productId}" routerLinkActive="router-link-active"
+                                        onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                        class="hover-zoom img-fluid w-100" />
+                                </div>
+                                <!-- {{item | json}} -->
+                                <div class="badge">Best Seller</div>
+                                <div class="card-content pt-3">
+                                    <div class="d-flex justify-content-between">
+                                        <small class="small-text mb-1">{{item.category}}</small>
+                                        <div class="d-flex">
+                                            <img src="../../../assets/images/Star.png"
+                                                style="height: 20px;width:20px" />
+                                            <div class="ml-1">4.5</div>
+                                        </div>
+                                    </div>
+                                    <h4 class="m-0 mb-1" [routerLink]="['/productDetails']"
+                                        [queryParams]="{productId:item.productId}" routerLinkActive="router-link-active"
+                                        style="font: 400 15px/24px Outfit,sans-serif!important">{{ item.product }}</h4>
+                                    <!-- <small class="small-color-text mb-1">2 Colors</small> -->
+                                    <div class="price-text mb-3">{{ rupee_sym }} {{
+                                        item.price
+                                        }}
+                                        <!-- <del class="delete-text pl-2">₹2500</del> -->
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-primary w-100">Add to Cart</button> -->
+                                </div>
+                            </div>
+                            <!-- <div class="card product-card">
+                                    <img class="card-img-top img-fluid"
+                                        src="assets/nirmalshreeUserInterface/images/slider/banner-2.jpg"
+                                        alt="banner 2" /> 
+                                         <a class="card-img-hover d-block" [routerLink]="['/productDetails']"
+                                        [queryParams]="{productId:item.productId}"
+                                        routerLinkActive="router-link-active">
+                                        <img class="card-img-top card-img-back img-fluid" src="{{ item.image }}"
+                                            onerror="this.src='assets/e-commerce/images/No_image_available.png'" alt="."
+                                            style="width: 100%; height: 20%">
+                                    </a>
+                                    <div class="card-info">
+                                        <div class="card-body">
+                                            <div class="product-title"><a class="link-title" (click)="processBar()"
+                                                    [routerLink]="['/productDetails']"
+                                                    [queryParams]="{productId:item.productId}"
+                                                    routerLinkActive="router-link-active">{{ item.product }}</a>
+                                            </div>
+                                            <div class="mt-1"> <span class="product-price"> {{ rupee_sym }} {{
+                                                    item.price
+                                                    }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <div class="product-link d-flex align-items-center justify-content-center">
+                                            <ng-template #userloggedOut>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div> -->
+                        </div>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--New arrivals end-->
+    <!--product ad start-->
+    <section class="special-offer header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-12 col-md-12 mb-md-5 mb-sm-0">
+                    <div class="position-relative  overflow-hidden">
+                        <div [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'VS9la1JCd1RoNTdXYUFkRWx2eXNYaUxvaVFjYzFMTjAwWkI3TVRESjl4ND0',image:'../../../assets/images/smart_watch.png',title:'Smart Watch'}"
+                            routerLinkActive="router-link-active" class="box-image-wrapper">
+                            <img class="img-fluid hover-zoom" src="../../../assets/images/smart_watch.png" alt="">
+                        </div>
+                        <div class="position-absolute top-50 translate-middle-y ps-5">
+                            <h3 class="text-white font-w-8"><span class="d-block"></span>Smart Watch</h3>
+                            <button
+                                [queryParams]="{categoriesId:'VS9la1JCd1RoNTdXYUFkRWx2eXNYaUxvaVFjYzFMTjAwWkI3TVRESjl4ND0',image:'../../../assets/images/smart_watch.png',title:'Smart Watch'}"
+                                routerLinkActive="router-link-active" [routerLink]="['/productList']"
+                                class="btn btn-light buy-btn d-flex align-items-center justify-content-center">
+                                Buy Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 mt-5 mt-md-0">
+                    <div class="position-relative  overflow-hidden box-image-wrapper">
+                        <a [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'dUNKM3BWNWJNRjQ1Mi9mL1lIc2xMdjdCNlJiR3ZYdVhLYXZ4L2RmdHNraz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active">
+                            <img class="img-fluid hover-zoom" src="../../../assets/images/product2.png" alt=""></a>
+                        <div class="position-absolute top-30  translate-middle-y ps-5">
+                            <h3 class="font-w-7 d-inline text-white mb-0 res-pb-5" style="padding-bottom: 10px;">Power
+                                bank
+                            </h3>
+                            <br />
+                            <button style="margin-top: 10px;"
+                                [queryParams]="{categoriesId:'dUNKM3BWNWJNRjQ1Mi9mL1lIc2xMdjdCNlJiR3ZYdVhLYXZ4L2RmdHNraz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                                routerLinkActive="router-link-active" [routerLink]="['/productList']"
+                                class="btn btn-light buy-btn d-flex align-items-center justify-content-center">
+                                Buy Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 mt-5 mt-md-0">
+                    <div class="position-relative  overflow-hidden box-image-wrapper">
+                        <a [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'L3NNKzVWSFJYWHY5L1pFNmt1MnRoRnA1clcvOUxPaS91YUhTcmNkMGFjND0',image:'../../../assets/images/product3.png',title:'Wireless Speakers'}"
+                            routerLinkActive="router-link-active" class="">
+                            <img class="img-fluid hover-zoom" src="../../../assets/images/product3.png" alt=""></a>
+                        <div class="position-absolute top-30 right-10 res-right-auto translate-middle-y ps-5">
+                            <h3 class="font-w-7 text-white mb-0 res-pb-5" style="padding-bottom: 10px;">Wireless
+                                Speakers</h3>
+                            <br />
+                            <button
+                                [queryParams]="{categoriesId:'dUNKM3BWNWJNRjQ1Mi9mL1lIc2xMdjdCNlJiR3ZYdVhLYXZ4L2RmdHNraz0',image:'../../../assets/images/product3.png',title:'Wireless Speakers'}"
+                                routerLinkActive="router-link-active" [routerLink]="['/productList']"
+                                class="btn btn-light buy-btn d-flex align-items-center justify-content-center">
+                                Buy Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--product ad end-->
+    <div class="brand-carousel">
+        <div class="owl-carousel no-pb align-items-center" data-dots="false" data-items="5" data-md-items="3"
+            data-sm-items="1">
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/syska.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/nirmal.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/intel.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/landmark.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/boat.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/syska.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/nirmal.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/intel.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/landmark.svg" alt="">
+            </div>
+            <div class="item box-image-wrapper">
+                <img class="img-fluid" src="../../../assets/images/boat.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- best seller start-->
+    <section *ngIf="has_best_seller" class="best-seller header-section">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12">
+                    <div class="mb-5">
+                        <h2 class="mb-0 section-heading">Best Seller</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex related-products c-product-space">
+                <div class="col">
+                    <carousel [loop]="true" [cellsToScroll]="1" [objectFit]="'cover'" [lightDOM]="true"
+                        class="carousel--slider-alignment h-440"
+                        [cellsToShow]="carousel_number !== null ? carousel_number : 3" [arrows]="true"
+                        [arrowsOutside]="true">
+                        <div class="carousel-cell" *ngFor="let item of result5">
+                            <div class="card product-list-card p-15 relative">
+                                <div class="card-image box-image-wrapper">
+                                    <img src="{{ item.image }}" class="hover-zoom img-fluid w-100"
+                                        [routerLink]="['/productDetails']" [queryParams]="{productId:item.productId}"
+                                        routerLinkActive="router-link-active" />
+                                </div>
+                                <div class="badge">Best Seller</div>
+                                <div class="card-content pt-3">
+                                    <div class="d-flex justify-content-between">
+                                        <small class="small-text mb-1">{{item.category}}</small>
+                                        <div class="d-flex">
+                                            <img src="../../../assets/images/Star.png"
+                                                style="height: 20px;width:20px" />
+                                            <div class="ml-1">4.5</div>
+                                        </div>
+                                    </div>
+                                    <h4 class="m-0 mb-1" [routerLink]="['/productDetails']"
+                                        [queryParams]="{productId:item.productId}"
+                                        routerLinkActive="router-link-active">{{item.product}}</h4>
+                                    <!-- <small class="small-color-text mb-1">2 Colors</small> -->
+                                    <div class="price-text mb-3">{{ rupee_sym }} {{
+                                        item.price
+                                        }}
+                                        <!-- <del class="delete-text pl-2">₹2500</del> -->
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-primary w-100">Add to Cart</button> -->
+                                </div>
+                            </div>
+                            <!-- <div class="card product-card">
+                                    <img class="card-img-top img-fluid"
+                                        src="assets/nirmalshreeUserInterface/images/slider/banner-2.jpg"
+                                        alt="banner 2" />
+                                    <a class="card-img-hover d-block" (click)="onProductDetailPage(item.productId)"
+                                        routerLinkActive="router-link-active">
+                                        <img class="card-img-top card-img-back img-fluid"
+                                            onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                            src="{{ item.image }}" alt="..."
+                                            style="width: 100%; height: 20%; object-fit: fill;">
+                                    </a>
+                                    <div class="card-info">
+                                        <div class="card-body">
+                                            <div class="product-title"><a class="link-title"
+                                                    [routerLink]="['/productDetails']"
+                                                    [queryParams]="{productId:item.productId}"
+                                                    routerLinkActive="router-link-active">{{ item.product }}</a>
+                                            </div>
+                                            <div class="mt-1"> <span class="product-price"> {{ rupee_sym }} {{
+                                                    item.price
+                                                    }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <div class="product-link d-flex align-items-center justify-content-center">
+                                            <ng-template #userloggedOut>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div> -->
+                        </div>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--best seller end-->
+    <div class="company-option">
+        <div class="d-flex justify-content-between">
+            <div class="text-center">
+                <div>
+                    <img src="../../../assets/images/freeShipping.svg" />
+                </div>
+                <div class="">Free Shipping</div>
+            </div>
+            <div class="text-center">
+                <div>
+                    <img src="../../../assets/images/returnMoney.svg" />
+                </div>
+                <div>Return Money</div>
+            </div>
+            <div class="text-center">
+                <div>
+                    <img src="../../../assets/images/support.svg" />
+                </div>
+                <div>24 * 7 Support</div>
+            </div>
+            <div class="text-center">
+                <div>
+                    <img src="../../../assets/images/securePayment.svg" />
+                </div>
+                <div>Secure Payment</div>
+            </div>
+        </div>
+    </div>
+    <!-- best seller start-->
+    <section class="header-section">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12">
+                    <div class="mb-5">
+                        <h2 class="mb-0 section-heading">Collections</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="relative box-image-wrapper card-hidden res-mb-4">
+                        <a [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'eTB5L3duVzFwbENrbGFYN1MyQm9zbmgxa0VHVGZFeWc0ZlVjVGRhbDJQYz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active"><img src="../../../assets/images/collection1.png"
+                                class="collection-res-img  hover-zoom img-fluid w-100" /></a>
+                        <div class="absolute collect-card-content p-5">
+                            <h4 class="m-0 text-white mb-3">Earbuds Collection</h4>
+                            <button class="btn btn-light buy-btn d-flex align-items-center justify-content-center" [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'eTB5L3duVzFwbENrbGFYN1MyQm9zbmgxa0VHVGZFeWc0ZlVjVGRhbDJQYz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active">Buy
+                                Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="relative box-image-wrapper card-hidden res-mb-4">
+                        <a [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'V0ZTUlVpUWRTdmNHUGNyYmZVTlVPOFduSWNxNmFKSzZvVlhrZkhMY0wwaz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active"><img src="../../../assets/images/collection2.png"
+                                class="collection-res-img  hover-zoom img-fluid w-100" /></a>
+                        <div class="absolute collect-card-content p-5">
+                            <h4 class="m-0 text-white mb-3">Headphone Collection</h4>
+                            <button class="btn btn-light buy-btn d-flex align-items-center justify-content-center" [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'V0ZTUlVpUWRTdmNHUGNyYmZVTlVPOFduSWNxNmFKSzZvVlhrZkhMY0wwaz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active">
+                                Buy Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="relative box-image-wrapper card-hidden res-mb-4">
+                        <a [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'a2RJR3RZYTkxdWorQzIrYTN5L29OSXpDSzdkdGtsSXFzNXFkZFRNa0t1dz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active"><img src="../../../assets/images/collection3.png"
+                                class="collection-res-img  hover-zoom img-fluid w-100" /></a>
+                        <div class="absolute collect-card-content p-5">
+                            <h4 class="m-0 text-white mb-3">Trimmer Collection</h4>
+                            <button class="btn btn-light buy-btn d-flex align-items-center justify-content-center" [routerLink]="['/productList']"
+                            [queryParams]="{categoriesId:'a2RJR3RZYTkxdWorQzIrYTN5L29OSXpDSzdkdGtsSXFzNXFkZFRNa0t1dz0',image:'../../../assets/images/product2.png',title:'Power Bank'}"
+                            routerLinkActive="router-link-active">Buy
+                                Now <img src="../../../assets/images/Arrow-Right-Up.svg" class="ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="header-section mb-5 pb-5">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h2 class="mb-0 section-heading">Latest From the Blog</h2>
+                        <button class="btn btn-primary theme-btn">
+                            Read More</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card blog-card res-mb-4">
+                        <div class="box-image-wrapper">
+                            <img src="../../../assets/images/img1.png" class="img-fluid w-100">
+                        </div>
+                        <div class="card-content blog-content">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="blog-tag me-3">Electronics</span>
+                                <span class="fs-40">&#183;</span>
+                                <span class="blog-tag ms-3">MAY 24, 2022</span>
+                            </div>
+                            <h3 class="m-0">Useful gadgets that make your workspace beautiful and productive</h3>
+                            <div class="d-flex justify-content-between align-items-center blog-bottom-bar">
+                                <p class="m-0">READ MORE</p>
+                                <div><img src="../../../assets/images/line_arrow.svg" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card blog-card res-mb-4">
+                        <div class="box-image-wrapper">
+                            <img src="../../../assets/images/img2.png" class="img-fluid w-100">
+                        </div>
+                        <div class="card-content blog-content">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="blog-tag me-3">Electronics</span>
+                                <span class="fs-40">&#183;</span>
+                                <span class="blog-tag ms-3">MAY 24, 2022</span>
+                            </div>
+                            <h3 class="m-0">Useful gadgets that make your workspace beautiful and productive</h3>
+                            <div class="d-flex justify-content-between align-items-center blog-bottom-bar">
+                                <p class="m-0">READ MORE</p>
+                                <div><img src="../../../assets/images/line_arrow.svg" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card blog-card res-mb-4">
+                        <div class="box-image-wrapper">
+                            <img src="../../../assets/images/img3.png" class="img-fluid w-100">
+                        </div>
+                        <div class="card-content blog-content">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="blog-tag me-3">Electronics</span>
+                                <span class="fs-40">&#183;</span>
+                                <span class="blog-tag ms-3">MAY 24, 2022</span>
+                            </div>
+                            <h3 class="m-0">Useful gadgets that make your workspace beautiful and productive</h3>
+                            <div class="d-flex justify-content-between align-items-center blog-bottom-bar">
+                                <p class="m-0">READ MORE</p>
+                                <div><img src="../../../assets/images/line_arrow.svg" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="has_featured_products" class="header-section">
+        <div class="container-fluid">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="mb-5">
+                        <h5 style="color: green;"></h5>
+                        <h6 class="text-primary mb-1">
+
+                        </h6>
+                        <h2 class="mb-0">Featured Item</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex related-products c-product-space">
+                <div class="col">
+
+                    <carousel [loop]="true" [cellsToScroll]="1" [objectFit]="'cover'" [height]="350" [lightDOM]="true"
+                        class="carousel--slider-alignment"
+                        [cellsToShow]="carousel_number !== null ? carousel_number : 4">
+                        <div class="carousel-cell" *ngFor="let item of result7">
+
+                            <div class="card product-card">
+                                <!--  <h5><span class="badge btn-custom-color">50% off</span></h5>
+                                                            <img class="card-img-top img-fluid" src="assets/nirmalshreeUserInterface/images/slider/banner-2.jpg" alt="banner 2" /> -->
+                                <button *ngIf="login; else notLogin" class="btn-wishlist btn-sm" type="button"
+                                    data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist" #product
+                                    [value]="item.productId"><i
+                                        [ngClass]="{'fa-heart' : true, 'fas':WishlistArrayValue.includes(item.productId), 'far':!WishlistArrayValue.includes(item.productId)}"
+                                        (click)='doWishlist(product.value,WishlistArrayValue.includes(item.productId))'></i>
+                                </button>
+                                <ng-template #notLogin>
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Add to wishlist" data-toggle="modal"
+                                        data-target="#login-modal" *ngIf="login"><i class="lar la-heart"></i>
+                                    </button>
+                                </ng-template>
+                                <a class="card-img-hover d-block" [routerLink]="['/productDetails']"
+                                    [queryParams]="{productId:item.productId}" routerLinkActive="router-link-active">
+                                    <img class="card-img-top card-img-back img-fluid"
+                                        onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                        src="{{ item.image }}" alt="..." style="width: 100%; height: 20%">
+                                </a>
+                                <div class="card-info">
+                                    <div class="card-body">
+                                        <div class="product-title"><a class="link-title" (click)="processBar()"
+                                                [routerLink]="['/productDetails']"
+                                                [queryParams]="{productId:item.productId}"
+                                                routerLinkActive="router-link-active">{{ item.product }}</a>
+                                        </div>
+                                        <div class="mt-1"> <span class="product-price"> {{ rupee_sym }} {{
+                                                item.price
+                                                }}</span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent border-0">
+                                    <div class="product-link d-flex align-items-center justify-content-center">
+
+                                        <button *ngIf="login; else userloggedOut"
+                                            class="btn-cart btn btn-primary btn-animated mx-3" #productId1
+                                            (click)="addCart2(productId1.value)" [value]="item.productId" type="button"
+                                            title="Add To Cart"><i class="las la-shopping-cart me-1"></i>
+                                        </button>
+                                        <ng-template #userloggedOut>
+                                            <button class="btn-cart btn btn-primary btn-animated mx-3"
+                                                data-toggle="modal" data-target="#login-modal" type="button"
+                                                title="Add To Cart"><i class="las la-shopping-cart me-1"></i>
+                                            </button>
+                                        </ng-template>
+
+                                        <button class="btn btn-view" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            (click)="productIdSet(productId2.value)" #productId2
+                                            [value]="item.productId" title="Quick View" data-bs-target="#quick-view"
+                                            data-bs-toggle="modal"><span><i class="las la-eye"></i></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--best seller end-->
+</div>
+
+<!--body content end-->
+
+<app-e-commerce-footer></app-e-commerce-footer>
+
+<!-- page wrapper end -->
+<app-e-commerce-model-dilog></app-e-commerce-model-dilog>
+<!-- <app-modal-dialog></app-modal-dialog> -->
+<!--back-to-top start-->
+
+<div class="scroll-top"><a class="smoothscroll" href="#top"><i class="las la-angle-up"></i></a></div>
+
+<div class="modal fade view-modal quickview" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" #closeBtn aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-5 col-12">
+                            <img class="img-fluid w-100 mh-100"
+                                onerror="this.src='assets/e-commerce/images/No_image_available.png'"
+                                [src]="result9.mainImage" alt="" />
+                        </div>
+                        <div class="col-lg-7 col-12 mt-5 mt-lg-0">
+                            <div class="product-details">
+                                <h3 class="mb-0">{{ result9.product }}</h3>
+                                <!--  <div class="star-rating mb-4"><i class="las la-star"></i><i class="las la-star"></i><i
+                                                    class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i>
+                                            </div> --> <span class="product-price h4">price: {{ rupee_sym }} {{
+                                    result9.price }}</span>
+                                <ul class="list-unstyled my-4">
+                                    <li class="mb-2"><span class="text-muted"
+                                            *ngIf="result9.stock > 0; else outOfStock">in stock </span>
+                                        <ng-template #outOfStock> <span class="text-muted">Out of stock </span>
+                                        </ng-template>
+                                    </li>
+                                    <!-- <li>Categories :<span class="text-muted">{{ result.category }}</span>
+                                                </li> -->
+                                    <li>
+                                        Brand :<span class="text-muted"> {{ result9.brand }}</span>
+                                    </li>
+                                </ul>
+                                <p class="mb-4">{{ result9.description }}</p>
+                                <!-- <p>BestSeller: <span class="text-muted"> {{ result9.bestSeller }}</span></p> -->
+                                <div class="d-sm-flex align-items-center mb-5" *ngIf="login">
+                                    <div class="d-flex justify-content-center align-items-center product-qty">
+                                        <button class="btn-product btn-product-up" (click)="decrease1(qty3)">
+                                            <i class="las la-minus"></i>
+                                        </button>
+                                        <label>{{ qty3 }}</label>
+                                        <button class="btn-product btn-product-down" (click)="increase1(qty3)">
+                                            <i class="las la-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-sm-flex align-items-center mt-5" *ngIf="login; else userLogout">
+                                    <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        title="Add To Cart" (click)="addCart1()"><i
+                                            class="las la-shopping-cart me-1"></i>Add To
+                                        Cart</button>
+                                    <!-- <a class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0" [routerLink]="['/e-commerce/productCart']" routerLinkActive="router-link-active"><i
+                                                                                    class="las la-shopping-cart me-1"></i>Add To Cart</a> -->
+                                    <!-- <a class="btn btn-animated btn-dark" [routerLink]="['/e-commerce/wishlist']"
+                                            routerLinkActive="router-link-active">
+                                            <i class="lar la-heart me-1"></i>Add To
+                                            Wishlist
+                                        </a> -->
+
+                                    <button class="btn btn-animated btn-dark" type="button" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Add To Wishlist" #product
+                                        (click)='homeAddToWishlist(product.value)' [value]="result6.productId"><i
+                                            class="lar la-heart"></i> Add to Wishlist
+                                    </button>
+                                </div>
+
+                                <ng-template #userLogout>
+                                    <button class="btn btn-primary btn-animated me-sm-4 mb-3 mb-sm-0"
+                                        (click)="addToCartWithoutLogin()"><i #productId2
+                                            class="las la-shopping-cart me-1" title="Add To Cart" data-toggle="modal"
+                                            data-target="#login-modal" data-bs-dismiss="modal"></i>Add To
+                                        Cart</button>
+                                    <!-- <a class="btn btn-animated btn-dark" data-toggle="modal" data-target="#login-modal"
+                                        data-bs-dismiss="modal" title="Add To Wishlist">
+                                        <i class="lar la-heart me-1"></i>Add To Wishlist </a> -->
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--back-to-top end-->
